@@ -12,7 +12,8 @@ announcement: https://metaredux.com/posts/2026/07/15/cider-2-0.html
 changelog: https://docs.cider.mx/cider/about/changelog.html
 
 # Three or four headline changes, each with a screenshot or GIF under
-# static/media/.
+# static/media/. Cards crop their image to 2:1 from the top; set
+# `focus: bottom` when the interesting part is at the bottom instead.
 highlights:
   - title: Rich results
     blurb: Evaluate something that returns an image and it renders right next to the code.
@@ -27,9 +28,11 @@ highlights:
   - title: Menus for everything
     blurb: Transient menus put every command within a keystroke, with no bindings to memorize.
     media: media/references-menu.webp
+    focus: bottom
     docs: https://docs.cider.mx/cider/usage/navigation.html
 
   - title: Who calls what
     blurb: Walk callers and callees as a tree, using the same tree view as every other CIDER browser.
     media: media/who-calls.webp
+    focus: bottom
     docs: https://docs.cider.mx/cider/usage/navigation.html

@@ -90,7 +90,7 @@
       <div class="highlight-grid">
         {{- range $release.highlights }}
         <article class="highlight">
-          <figure class="shot">{{ partial "media.html" (dict "src" .media "alt" .title) }}</figure>
+          <figure class="shot{{ with .focus }} focus-{{ . }}{{ end }}">{{ partial "media.html" (dict "src" .media "alt" .title) }}</figure>
           <h3><a href="{{ .docs }}">{{ .title }}</a></h3>
           <p>{{ .blurb }}</p>
         </article>
