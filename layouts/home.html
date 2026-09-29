@@ -1,0 +1,109 @@
+{{ define "main" }}
+{{- $release := hugo.Data.release }}
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="{{ "/" | relURL }}">CIDER</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#news">What's new</a>
+      <a href="#community">Community</a>
+      <a href="{{ site.Params.docs }}">Docs</a>
+      <a href="{{ site.Params.github }}">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</div>
+      <h1>{{ .Params.tagline }}</h1>
+      <p class="lead">{{ .Params.lead }}</p>
+      <p class="actions">
+        <a class="button primary" href="https://docs.cider.mx/cider/basics/installation.html">Get started</a>
+        <a class="button" href="{{ site.Params.docs }}">Read the manual</a>
+      </p>
+      <p class="version">Latest release: <a href="{{ $release.changelog }}">{{ $release.version }}</a></p>
+      {{- with .Params.heroMedia }}
+      <figure class="hero-media">{{ partial "media.html" (dict "src" . "alt" $.Params.heroAlt) }}</figure>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="prose">
+    <div class="wrap narrow">
+      {{ .Content }}
+    </div>
+  </section>
+
+  <section id="features" class="alt">
+    <div class="wrap">
+      <h2>What you get</h2>
+      <div class="grid">
+        {{- range hugo.Data.features }}
+        <article class="card">
+          {{- with .media }}{{ partial "media.html" (dict "src" . "alt" "") }}{{ end }}
+          <h3><a href="{{ .docs }}">{{ .title }}</a></h3>
+          <p>{{ .blurb }}</p>
+        </article>
+        {{- end }}
+      </div>
+      <p class="more">That's the highlights. <a href="{{ site.Params.docs }}">The manual</a> has the rest.</p>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap narrow">
+      <h2>What's new in {{ $release.version }}</h2>
+      <ul>
+        {{- range $release.highlights }}
+        <li>{{ . }}</li>
+        {{- end }}
+      </ul>
+      <p>
+        Read <a href="{{ $release.announcement.url }}">{{ $release.announcement.title }}</a>
+        or the full <a href="{{ $release.changelog }}">changelog</a>.
+      </p>
+    </div>
+  </section>
+
+  <section id="community" class="alt">
+    <div class="wrap">
+      <div class="columns">
+        <div>
+          <h2>Get help</h2>
+          <ul class="links">
+            {{- range hugo.Data.community.help }}
+            <li><a href="{{ .url }}">{{ .name }}</a> <span>{{ .blurb }}</span></li>
+            {{- end }}
+          </ul>
+        </div>
+        <div>
+          <h2>Around CIDER</h2>
+          <ul class="links">
+            {{- range hugo.Data.community.ecosystem }}
+            <li><a href="{{ .url }}">{{ .name }}</a> <span>{{ .blurb }}</span></li>
+            {{- end }}
+          </ul>
+        </div>
+      </div>
+      <div class="support">
+        <h2>Support CIDER</h2>
+        <p>CIDER is built by volunteers and funded by its users. If it saves you time, consider chipping in:</p>
+        <p class="actions">
+          {{- range hugo.Data.community.support }}
+          <a class="button" href="{{ .url }}">{{ .name }}</a>
+          {{- end }}
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2012-{{ now.Year }} Bozhidar Batsov and CIDER contributors.
+      Source on <a href="https://github.com/clojure-emacs/cider.mx">GitHub</a>.</p>
+  </div>
+</footer>
+{{ end }}

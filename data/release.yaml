@@ -1,0 +1,13 @@
+# Update on every release. The highlights are the release's headline
+# changes, a handful at most; the announcement and changelog have the rest.
+version: "2.0.1"
+date: 2026-07-23
+announcement:
+  title: "CIDER 2.0: Sky is the Limit"
+  url: https://metaredux.com/posts/2026/07/15/cider-2-0.html
+changelog: https://docs.cider.mx/cider/about/changelog.html
+highlights:
+  - Rich results are on by default, so images and other content render inline.
+  - Inline macro stepping and source-aware cross-references.
+  - Transient menus throughout, and one tree view shared by every browser.
+  - An overhauled debugger, tracing, enlighten and stacktrace view.

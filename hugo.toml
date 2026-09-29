@@ -1,0 +1,14 @@
+baseURL = "https://cider.mx/"
+locale = "en-US"
+title = "CIDER - the Clojure Interactive Development Environment that Rocks"
+disableKinds = ["taxonomy", "term", "section", "RSS", "sitemap", "404"]
+
+[params]
+  description = "CIDER turns Emacs into an interactive Clojure environment: evaluate code in your running program, inspect and debug it, and run your tests, all without leaving the editor."
+  docs = "https://docs.cider.mx/cider/"
+  github = "https://github.com/clojure-emacs/cider"
+  socialImage = "img/social.png"
+
+[markup.goldmark.renderer]
+  # the page content is ours, so allow the odd bit of inline HTML (e.g. <kbd>)
+  unsafe = true

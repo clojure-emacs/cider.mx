@@ -1,0 +1,7 @@
+{{- /* A screenshot or GIF under static/, or an .mp4/.webm clip. */ -}}
+{{- $src := .src | relURL }}
+{{- if or (strings.HasSuffix .src ".mp4") (strings.HasSuffix .src ".webm") }}
+<video src="{{ $src }}" autoplay loop muted playsinline></video>
+{{- else }}
+<img src="{{ $src }}" alt="{{ .alt }}" loading="lazy">
+{{- end }}

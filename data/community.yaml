@@ -1,0 +1,35 @@
+help:
+  - name: GitHub Discussions
+    url: https://github.com/clojure-emacs/cider/discussions
+    blurb: Questions, ideas and show-and-tell.
+  - name: "#cider on Clojurians Slack"
+    url: http://clojurians.net/
+    blurb: Very active, and the quickest way to get unstuck.
+  - name: Issue tracker
+    url: https://github.com/clojure-emacs/cider/issues
+    blurb: Bugs and feature requests.
+
+# CIDER's own funding page lists the same channels, with Open Collective first.
+support:
+  - name: Open Collective
+    url: https://opencollective.com/cider
+  - name: GitHub Sponsors
+    url: https://github.com/sponsors/bbatsov
+  - name: Patreon
+    url: https://www.patreon.com/bbatsov
+  - name: PayPal
+    url: https://www.paypal.me/bbatsov
+
+ecosystem:
+  - name: cider-nrepl
+    url: https://github.com/clojure-emacs/cider-nrepl
+    blurb: The nREPL middleware behind CIDER's smarts, also used by other editors.
+  - name: Orchard
+    url: https://github.com/clojure-emacs/orchard
+    blurb: Editor-agnostic Clojure tooling library.
+  - name: nREPL
+    url: https://nrepl.org
+    blurb: The network REPL CIDER talks to.
+  - name: clj-refactor
+    url: https://github.com/clojure-emacs/clj-refactor.el
+    blurb: Refactoring on top of CIDER.
