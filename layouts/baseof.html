@@ -6,6 +6,13 @@
   <title>{{ site.Title }}</title>
   <meta name="description" content="{{ site.Params.description }}">
   <meta name="color-scheme" content="light dark">
+  <script>
+    // Apply a theme picked with the toggle before the first paint.
+    try {
+      var theme = localStorage.getItem("theme");
+      if (theme) document.documentElement.dataset.theme = theme;
+    } catch (e) {}
+  </script>
   <link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32.png" | relURL }}">
   <link rel="apple-touch-icon" href="{{ "favicon-152.png" | relURL }}">

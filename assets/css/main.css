@@ -24,8 +24,11 @@
   --band-border: #2e2e36;
 }
 
+/* The dark theme follows the system, unless the visitor picked a theme with
+   the toggle in the nav (stored as data-theme on <html>). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --bg: #111114;
     --bg-alt: #17171b;
     --fg: #ecebe6;
@@ -41,6 +44,25 @@
     --band-card: #17171b;
   }
 }
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111114;
+  --bg-alt: #17171b;
+  --fg: #ecebe6;
+  --muted: #a8a69e;
+  --faint: #7d7b74;
+  --link: #ffd55f;
+  --border: #2a2a31;
+  --card: #1a1a1f;
+  --grid: rgb(255 255 255 / 0.035);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.35);
+  --shot-shadow: 0 2px 6px rgb(0 0 0 / 0.5), 0 30px 60px -12px rgb(0 0 0 / 0.7);
+  --band-bg: #0b0b0d;
+  --band-card: #17171b;
+}
+
+:root[data-theme="light"] { color-scheme: light; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
@@ -99,6 +121,27 @@ section { padding: 6rem 0; }
 .nav nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; white-space: nowrap; }
 .nav nav a:hover { color: var(--fg); }
 .nav .gh { color: var(--fg); }
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--muted);
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--fg); border-color: var(--accent-strong); }
+.theme-toggle svg { width: 1rem; height: 1rem; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .moon { display: none; }
+}
 .stars {
   margin-left: 0.3rem;
   padding: 0.1rem 0.5rem;
