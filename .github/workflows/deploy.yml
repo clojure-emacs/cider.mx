@@ -5,6 +5,13 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # The latest version and star count come from the GitHub API at build time,
+  # so rebuild weekly to keep them current. A CIDER release can also trigger a
+  # rebuild right away with a repository_dispatch event of this type.
+  schedule:
+    - cron: "17 5 * * 1"
+  repository_dispatch:
+    types: [cider-release]
 
 permissions:
   contents: read
@@ -32,6 +39,8 @@ jobs:
         # --panicOnWarning turns deprecations into failures, so we hear
         # about them before the next Hugo bump removes something.
         run: hugo --minify --gc --panicOnWarning
+        env:
+          HUGO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:

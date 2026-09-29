@@ -1,73 +1,141 @@
 {{ define "main" }}
 {{- $release := hugo.Data.release }}
+{{- $gh := partialCached "github.html" . }}
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="{{ "/" | relURL }}">CIDER</a>
+    <a class="brand" href="{{ "/" | relURL }}">
+      <img src="{{ "img/cider-logo-square.svg" | relURL }}" alt="" width="28" height="28">
+      <span>CIDER</span>
+    </a>
     <nav>
       <a href="#features">Features</a>
-      <a href="#news">What's new</a>
-      <a href="#community">Community</a>
+      <a href="#release">CIDER {{ $release.series }}</a>
+      <a href="#faq">FAQ</a>
       <a href="{{ site.Params.docs }}">Docs</a>
-      <a href="{{ site.Params.github }}">GitHub</a>
+      <a class="gh" href="{{ site.Params.github }}">GitHub
+        {{- with $gh.stars }} <span class="stars">&#9733; {{ if ge . 1000 }}{{ printf "%.1fk" (div (float .) 1000) }}{{ else }}{{ . }}{{ end }}</span>{{ end }}</a>
     </nav>
   </div>
 </header>
 
 <main>
   <section class="hero">
-    <div class="wrap">
-      <div class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</div>
-      <h1>{{ .Params.tagline }}</h1>
-      <p class="lead">{{ .Params.lead }}</p>
-      <p class="actions">
-        <a class="button primary" href="https://docs.cider.mx/cider/basics/installation.html">Get started</a>
-        <a class="button" href="{{ site.Params.docs }}">Read the manual</a>
-      </p>
-      <p class="version">Latest release: <a href="{{ $release.changelog }}">{{ $release.version }}</a></p>
-      {{- with .Params.heroMedia }}
-      <figure class="hero-media">{{ partial "media.html" (dict "src" . "alt" $.Params.heroAlt) }}</figure>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <a class="pill" href="#release"><strong>New</strong> {{ $release.title }} &rarr;</a>
+        <h1>{{ .Params.tagline }}</h1>
+        <p class="lead">{{ .Params.lead }}</p>
+        <div class="actions">
+          <a class="button primary" href="#get-started">Get started</a>
+          <a class="button" href="{{ site.Params.docs }}">Read the manual</a>
+        </div>
+        <div class="install" data-copy="{{ .Params.install }}">
+          <code>{{ .Params.install }}</code>
+          <button type="button" aria-label="Copy the install command">Copy</button>
+        </div>
+        <p class="version">Latest release <a href="{{ $gh.releaseURL }}">{{ $gh.version }}</a></p>
+      </div>
+      <figure class="hero-media shot">
+        {{ partial "media.html" (dict "src" .Params.heroMedia "alt" .Params.heroAlt) }}
+      </figure>
+    </div>
+  </section>
+
+  <section class="pillars">
+    <div class="wrap pillar-grid">
+      {{- range $i, $p := .Params.pillars }}
+      <div class="pillar">
+        <span class="pillar-icon" aria-hidden="true">{{ index (slice "&#955;" "&#9737;" "&#8734;") $i | safeHTML }}</span>
+        <h2>{{ $p.title }}</h2>
+        <p>{{ $p.blurb }}</p>
+      </div>
       {{- end }}
     </div>
   </section>
 
-  <section class="prose">
-    <div class="wrap narrow">
-      {{ .Content }}
+  <section id="features" class="showcase">
+    <div class="wrap">
+      <p class="eyebrow">Features</p>
+      <h2 class="section-title">Everything happens against the running program</h2>
+      {{- range $i, $f := hugo.Data.showcase }}
+      <article class="feature{{ if modBool $i 2 }}{{ else }} flip{{ end }}">
+        <div class="feature-text">
+          <h3>{{ $f.title }}</h3>
+          <p class="keys"><kbd>{{ $f.keys }}</kbd></p>
+          <p>{{ $f.blurb }}</p>
+          <a class="more-link" href="{{ $f.docs }}">Learn more &rarr;</a>
+        </div>
+        {{- if os.FileExists (printf "static/%s" $f.media) }}
+        <figure class="shot">{{ partial "media.html" (dict "src" $f.media "alt" $f.alt) }}</figure>
+        {{- end }}
+      </article>
+      {{- end }}
+
+      <div class="also">
+        <h3>&hellip;and a lot more</h3>
+        <ul class="chips">
+          {{- range hugo.Data.features }}
+          <li><a href="{{ .docs }}">{{ .name }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section id="features" class="alt">
+  <section id="release" class="release">
     <div class="wrap">
-      <h2>What you get</h2>
-      <div class="grid">
-        {{- range hugo.Data.features }}
-        <article class="card">
-          {{- with .media }}{{ partial "media.html" (dict "src" . "alt" "") }}{{ end }}
+      <p class="eyebrow">What's new</p>
+      <h2 class="section-title">{{ $release.title }}</h2>
+      <p class="release-summary">{{ $release.summary }}</p>
+      <div class="highlight-grid">
+        {{- range $release.highlights }}
+        <article class="highlight">
+          <figure class="shot">{{ partial "media.html" (dict "src" .media "alt" .title) }}</figure>
           <h3><a href="{{ .docs }}">{{ .title }}</a></h3>
           <p>{{ .blurb }}</p>
         </article>
         {{- end }}
       </div>
-      <p class="more">That's the highlights. <a href="{{ site.Params.docs }}">The manual</a> has the rest.</p>
-    </div>
-  </section>
-
-  <section id="news">
-    <div class="wrap narrow">
-      <h2>What's new in {{ $release.version }}</h2>
-      <ul>
-        {{- range $release.highlights }}
-        <li>{{ . }}</li>
-        {{- end }}
-      </ul>
-      <p>
-        Read <a href="{{ $release.announcement.url }}">{{ $release.announcement.title }}</a>
-        or the full <a href="{{ $release.changelog }}">changelog</a>.
+      <p class="release-links actions">
+        <a class="button primary" href="{{ $release.announcement }}">Read the announcement</a>
+        <a class="button ghost" href="{{ $release.changelog }}">Full changelog</a>
       </p>
     </div>
   </section>
 
-  <section id="community" class="alt">
+  <section id="get-started" class="start">
+    <div class="wrap">
+      <p class="eyebrow">Get started</p>
+      <h2 class="section-title">Up and running in a minute</h2>
+      <ol class="steps">
+        {{- range .Params.steps }}
+        <li>
+          <h3>{{ .title }}</h3>
+          <p>{{ .body | safeHTML }}</p>
+        </li>
+        {{- end }}
+      </ol>
+      <div class="start-note">{{ .Content }}
+        <p>Connecting to a REPL that's already running, in a container or on another
+          machine? <a href="https://docs.cider.mx/cider/basics/up_and_running.html">Up and Running</a> has you covered.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="wrap narrow">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section-title">Questions people ask</h2>
+      {{- range hugo.Data.faq }}
+      <details>
+        <summary>{{ .q }}</summary>
+        <p>{{ .a | safeHTML }}</p>
+      </details>
+      {{- end }}
+    </div>
+  </section>
+
+  <section id="community" class="community">
     <div class="wrap">
       <div class="columns">
         <div>
@@ -89,12 +157,12 @@
       </div>
       <div class="support">
         <h2>Support CIDER</h2>
-        <p>CIDER is built by volunteers and funded by its users. If it saves you time, consider chipping in:</p>
-        <p class="actions">
+        <p>CIDER is built by volunteers and funded by its users. If it saves you time, consider chipping in.</p>
+        <div class="actions">
           {{- range hugo.Data.community.support }}
           <a class="button" href="{{ .url }}">{{ .name }}</a>
           {{- end }}
-        </p>
+        </div>
       </div>
     </div>
   </section>
@@ -106,4 +174,15 @@
       Source on <a href="https://github.com/clojure-emacs/cider.mx">GitHub</a>.</p>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll(".install button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      navigator.clipboard.writeText(b.parentElement.dataset.copy).then(function () {
+        b.textContent = "Copied";
+        setTimeout(function () { b.textContent = "Copy"; }, 1500);
+      });
+    });
+  });
+</script>
 {{ end }}

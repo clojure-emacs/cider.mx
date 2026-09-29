@@ -1,0 +1,38 @@
+# The flagship features, shown as alternating rows with a GIF each.
+# `keys` is the binding that does the thing, shown next to the title.
+- title: Evaluate anything, see the result where you are
+  keys: C-c C-e
+  blurb: >-
+    Send a form, a definition or the whole buffer to your running program and
+    the result appears inline, right next to the code. No copy-pasting into a
+    REPL, no restarts.
+  media: media/cider-eval.gif
+  alt: Evaluating Clojure forms one by one, each result appearing inline next to its form
+  docs: https://docs.cider.mx/cider/usage/code_evaluation.html
+
+- title: Take any value apart
+  keys: C-c M-i
+  blurb: >-
+    The inspector lets you walk any value in the running program: drill into
+    nested data, page through huge collections and jump back out.
+  media: media/inspector.gif
+  alt: Inspecting the result of group-by and drilling into a nested map
+  docs: https://docs.cider.mx/cider/debugging/inspector.html
+
+- title: Step through code as it runs
+  keys: C-u C-M-x
+  blurb: >-
+    Instrument a function and the next call stops in the debugger, showing each
+    intermediate value as you step through it, Edebug-style.
+  media: media/debugger.gif
+  alt: Stepping through a thread-last pipeline in the debugger, with each value shown inline
+  docs: https://docs.cider.mx/cider/debugging/debugger.html
+
+- title: Tests without leaving the editor
+  keys: C-c C-t n
+  blurb: >-
+    Run a test, a namespace or the whole project. Failures come with a diff of
+    expected against actual, and rerunning just the failures is one key away.
+  media: media/tests.gif
+  alt: Running a namespace's tests and getting a report with the failing assertion
+  docs: https://docs.cider.mx/cider/testing/running_tests.html

@@ -1,49 +1,33 @@
-# One entry per feature card. `media` is optional: a path under static/,
-# ideally a short GIF or a screenshot of the feature in action.
-- title: Interactive evaluation
-  blurb: Evaluate any form, definition or buffer in your running program and see the result inline, right where the code is.
-  docs: https://docs.cider.mx/cider/usage/code_evaluation.html
-
-- title: A powerful REPL
-  blurb: A REPL with completion, documentation, history search, pretty-printing and rich results like inline images.
-  docs: https://docs.cider.mx/cider/repl/basic_usage.html
-
-- title: Completion and documentation
-  blurb: Context-aware completion, eldoc, docstrings, Java docs and ClojureDocs, all sourced from the live program.
+# Everything else worth a mention, shown as a compact list of links.
+- name: Context-aware completion
   docs: https://docs.cider.mx/cider/usage/code_completion.html
-
-- title: Navigation and cross-references
-  blurb: Jump to any definition, including library and Java sources, and find out who calls a function and what it calls.
+- name: Docs, Javadoc and ClojureDocs
+  docs: https://docs.cider.mx/cider/usage/working_with_documentation.html
+- name: Jump to definition, even in jars
   docs: https://docs.cider.mx/cider/usage/navigation.html
-
-- title: Inspector
-  blurb: Walk any value in the running program, drill into nested data and page through huge collections.
-  docs: https://docs.cider.mx/cider/debugging/inspector.html
-
-- title: Debugger
-  blurb: Step through code, inspect locals and evaluate expressions mid-execution, Edebug-style.
-  docs: https://docs.cider.mx/cider/debugging/debugger.html
-
-- title: Tracing, enlighten and tap>
-  blurb: Watch function calls, see the values flowing through your code as it runs, and browse everything sent to tap>.
-  docs: https://docs.cider.mx/cider/debugging/tracing.html
-
-- title: Tests without leaving the editor
-  blurb: Run a test, a namespace or the whole project, then diff expected against actual and rerun just what failed.
-  docs: https://docs.cider.mx/cider/testing/running_tests.html
-
-- title: Macroexpansion
-  blurb: Expand a macro one step at a time, right in the source buffer, or all the way down in a separate one.
-  docs: https://docs.cider.mx/cider/debugging/macroexpansion.html
-
-- title: Code reloading
-  blurb: Reload changed namespaces, or refresh the whole project, without restarting the JVM.
-  docs: https://docs.cider.mx/cider/usage/code_reloading.html
-
-- title: Friendly errors
-  blurb: Stacktraces trimmed to the frames that matter, with your code highlighted and the cause up front.
+- name: Friendly stacktraces
   docs: https://docs.cider.mx/cider/usage/dealing_with_errors.html
-
-- title: Clojure everywhere
-  blurb: Clojure, ClojureScript (shadow-cljs, figwheel and friends), Babashka, nbb, Basilisp and ClojureCLR.
-  docs: https://docs.cider.mx/cider/platforms/overview.html
+- name: Tracing
+  docs: https://docs.cider.mx/cider/debugging/tracing.html
+- name: Enlighten
+  docs: https://docs.cider.mx/cider/debugging/enlighten.html
+- name: tap> viewer
+  docs: https://docs.cider.mx/cider/debugging/tap.html
+- name: Profiling
+  docs: https://docs.cider.mx/cider/debugging/profiling.html
+- name: Log viewer
+  docs: https://docs.cider.mx/cider/debugging/logging.html
+- name: Code reloading
+  docs: https://docs.cider.mx/cider/usage/code_reloading.html
+- name: Formatting
+  docs: https://docs.cider.mx/cider/usage/formatting.html
+- name: Pretty printing
+  docs: https://docs.cider.mx/cider/usage/pretty_printing.html
+- name: REPL history
+  docs: https://docs.cider.mx/cider/repl/history.html
+- name: Remote and container REPLs
+  docs: https://docs.cider.mx/cider/basics/remote.html
+- name: clojure-ts-mode
+  docs: https://docs.cider.mx/cider/config/clojure_ts_mode.html
+- name: Works with clojure-lsp
+  docs: https://docs.cider.mx/cider/config/lsp.html

@@ -1,13 +1,35 @@
-# Update on every release. The highlights are the release's headline
-# changes, a handful at most; the announcement and changelog have the rest.
-version: "2.0.1"
-date: 2026-07-23
-announcement:
-  title: "CIDER 2.0: Sky is the Limit"
-  url: https://metaredux.com/posts/2026/07/15/cider-2-0.html
+# The feature release the page spotlights. Edit this only for minor and
+# major releases: the latest version (patch releases included) is looked up
+# on GitHub when the site is built, so a bugfix release needs no changes here.
+series: "2.0"
+title: "CIDER 2.0: Sky is the Limit"
+date: 2026-07-15
+summary: >-
+  The biggest release in years: long-dormant ideas finally landed, the
+  "understand your code" toolbox got a thorough overhaul, and everything
+  became more consistent and easier to discover.
+announcement: https://metaredux.com/posts/2026/07/15/cider-2-0.html
 changelog: https://docs.cider.mx/cider/about/changelog.html
+
+# Three or four headline changes, each with a screenshot or GIF under
+# static/media/.
 highlights:
-  - Rich results are on by default, so images and other content render inline.
-  - Inline macro stepping and source-aware cross-references.
-  - Transient menus throughout, and one tree view shared by every browser.
-  - An overhauled debugger, tracing, enlighten and stacktrace view.
+  - title: Rich results
+    blurb: Evaluate something that returns an image and it renders right next to the code.
+    media: media/rich-results.webp
+    docs: https://docs.cider.mx/cider/usage/code_evaluation.html#rich-results
+
+  - title: Inline macro stepping
+    blurb: Expand a macro one step at a time, in place, without leaving the source buffer.
+    media: media/macrostep.webp
+    docs: https://docs.cider.mx/cider/debugging/macroexpansion.html
+
+  - title: Menus for everything
+    blurb: Transient menus put every command within a keystroke, with no bindings to memorize.
+    media: media/references-menu.webp
+    docs: https://docs.cider.mx/cider/usage/navigation.html
+
+  - title: Who calls what
+    blurb: Walk callers and callees as a tree, using the same tree view as every other CIDER browser.
+    media: media/who-calls.webp
+    docs: https://docs.cider.mx/cider/usage/navigation.html

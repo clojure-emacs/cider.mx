@@ -1,0 +1,36 @@
+- q: Do I need to be an Emacs expert?
+  a: >-
+    No. You need to be able to open files and install a package; CIDER's
+    transient menus (<kbd>C-c C-x</kbd> to start, <kbd>C-c C-t</kbd> for tests,
+    <kbd>C-c C-w</kbd> for references and so on) show every command, so there's
+    very little to memorize up front.
+
+- q: What about ClojureScript, Babashka and friends?
+  a: >-
+    ClojureScript works with shadow-cljs, figwheel and the other common REPLs,
+    and CIDER also talks to Babashka, nbb, Basilisp and ClojureCLR. See
+    <a href="https://docs.cider.mx/cider/cljs/overview.html">ClojureScript</a> and
+    <a href="https://docs.cider.mx/cider/platforms/overview.html">Alternative Platforms</a>
+    for what's supported where.
+
+- q: Can I use it together with clojure-lsp?
+  a: >-
+    Yes, plenty of people do. CIDER knows what's loaded in the running program
+    and clojure-lsp knows your source statically, so they complement each other.
+    The manual has <a href="https://docs.cider.mx/cider/config/lsp.html">a guide</a>
+    to making them share the work.
+
+- q: Does my project need anything special?
+  a: >-
+    No. <kbd>C-c C-x j j</kbd> figures out whether it's a Clojure CLI,
+    Leiningen, shadow-cljs or Babashka project and starts the right REPL for
+    it, adding CIDER's middleware where the tool needs it. You can also
+    <a href="https://docs.cider.mx/cider/basics/up_and_running.html">connect to a
+    REPL you started yourself</a>.
+
+- q: Who's behind it?
+  a: >-
+    CIDER is open source, has been going since 2012, and is built by
+    <a href="https://github.com/clojure-emacs/cider/graphs/contributors">hundreds
+    of contributors</a> and funded by its users through Open Collective and
+    GitHub Sponsors.
