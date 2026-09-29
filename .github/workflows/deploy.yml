@@ -35,10 +35,17 @@ jobs:
         run: |
           curl -fsSLo hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.deb"
           sudo dpkg -i hugo.deb
+      - id: pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
       - name: Build
         # --panicOnWarning turns deprecations into failures, so we hear
-        # about them before the next Hugo bump removes something.
-        run: hugo --minify --gc --panicOnWarning
+        # about them before the next Hugo bump removes something. The base
+        # URL comes from the Pages settings, so the site also works before
+        # the custom domain is attached.
+        run: |
+          hugo --minify --gc --panicOnWarning \
+            ${{ steps.pages.outputs.base_url && format('--baseURL {0}/', steps.pages.outputs.base_url) || '' }}
         env:
           HUGO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-pages-artifact@v5
