@@ -4,7 +4,7 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="{{ "/" | relURL }}">
-      <img src="{{ "img/cider-logo-square.svg" | relURL }}" alt="" width="28" height="28">
+      {{ (resources.Get "img/cider-logo-square.svg").Content | safeHTML }}
       <span>CIDER</span>
     </a>
     <nav>
