@@ -8,3 +8,9 @@ updates:
       actions:
         patterns:
           - "*"
+  # The theme (github.com/bbatsov/hugo-project-landing) is a Hugo module, so
+  # new tagged releases of it arrive as go.mod bumps.
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly

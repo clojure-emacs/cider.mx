@@ -7,7 +7,16 @@ disableKinds = ["taxonomy", "term", "section", "RSS", "sitemap", "404"]
 # --panicOnWarning); the fallback version covers it.
 ignoreLogs = ["github-fetch"]
 
+[module]
+  [[module.imports]]
+    path = "github.com/bbatsov/hugo-project-landing"
+
 [params]
+  name = "CIDER"
+  logo = "img/cider-logo.svg"
+  logoStyle = "wordmark"
+  sourceRepo = "https://github.com/clojure-emacs/cider.mx"
+  copyright = "2012-{year} Bozhidar Batsov and CIDER contributors."
   description = "CIDER turns Emacs into an interactive Clojure environment: evaluate code in your running program, inspect and debug it, and run your tests, all without leaving the editor."
   docs = "https://docs.cider.mx/cider/"
   github = "https://github.com/clojure-emacs/cider"

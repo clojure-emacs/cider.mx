@@ -7,6 +7,7 @@ lead: >-
 install: M-x package-install RET cider RET
 heroMedia: media/cider-eval.gif
 heroAlt: Evaluating Clojure forms one by one with C-c C-e, each result appearing inline next to its form
+featuresTitle: Everything happens against the running program
 
 pillars:
   - title: Live
@@ -39,3 +40,7 @@ steps:
 
 If you've used SLIME or SLY with Common Lisp, Geiser with Scheme or Emacs Lisp
 itself, CIDER will feel like home.
+
+Connecting to a REPL that's already running, in a container or on another
+machine? [Up and Running](https://docs.cider.mx/cider/basics/up_and_running.html)
+has you covered.

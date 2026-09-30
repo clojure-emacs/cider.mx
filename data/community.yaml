@@ -9,6 +9,10 @@ help:
     url: https://github.com/clojure-emacs/cider/issues
     blurb: Bugs and feature requests.
 
+supportBlurb: >-
+  CIDER is built by volunteers and funded by its users. If it saves you time,
+  consider chipping in.
+
 # CIDER's own funding page lists the same channels, with Open Collective first.
 support:
   - name: Open Collective
