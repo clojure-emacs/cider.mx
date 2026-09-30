@@ -97,15 +97,101 @@ kbd {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+/* The bottom of the frame: the mode line, and under it the echo area, which
+   turns into the minibuffer for M-x. */
+.minibuffer-area {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--bg);
+}
 .mode-line.bottom {
   position: static;
   border-top: 1px solid var(--mode-line-border);
   border-bottom: 0;
 }
+.mode-line .position { min-width: 4ch; }
+.mode-line .hint kbd { font-size: 0.85em; padding: 0 0.3em; border-bottom-width: 2px; }
 .echo-area {
-  padding: 0.35rem 1ch 1.5rem;
+  min-height: 1.5em;
+  padding: 0.2rem 1ch;
   font: 15px/1.5 var(--mono);
   color: var(--fg-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body { padding-bottom: 4.5rem; }
+
+.crumbs { display: flex; min-width: 0; }
+.crumbs .buffer { font-weight: 700; text-decoration: none; }
+.crumb-trail { overflow: hidden; text-overflow: ellipsis; white-space: pre; }
+
+/* M-x: a vertico-style list over the minibuffer. */
+.completions {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--mode-line-border);
+  font: 15px/1.5 var(--mono);
+}
+.completions ul { list-style: none; margin: 0; padding: 0.25rem 0; }
+.completions li { display: flex; justify-content: space-between; gap: 2ch; padding: 0 1ch; cursor: pointer; }
+.completions li[aria-selected] { background: var(--region); color: var(--region-fg); }
+.completions li .note { color: var(--fg-dim); font-style: italic; }
+.completions li[aria-selected] .note { color: inherit; }
+.completions li.none { color: var(--fg-dim); cursor: default; }
+.mx-prompt { display: flex; gap: 1ch; padding: 0.2rem 1ch 0.35rem; }
+.mx-prompt span { color: var(--blue); font-weight: 700; }
+.mx-prompt input {
+  flex: 1;
+  font: inherit;
+  color: var(--fg);
+  background: none;
+  border: 0;
+  outline: none;
+  caret-color: var(--region);
+}
+
+/* which-key: the bindings, in a popup above the mode line. */
+.which-key {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  padding: 0.75rem 2ch;
+  background: var(--bg-dim);
+  border-top: 1px solid var(--mode-line-border);
+  font: 15px/1.6 var(--mono);
+}
+.which-key dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(22ch, max-content) minmax(18ch, 1fr)); gap: 0.2rem 2ch; margin: 0; }
+.which-key dt { color: var(--magenta); text-align: right; }
+.which-key dd { margin: 0; }
+
+/* The frame. On wide screens it's split like C-x 3: the text on the left and
+   a window on the right showing the media for the section being read. */
+.media-window { display: none; }
+@media (min-width: 1200px) {
+  .js .frame { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .js .media-window {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 2.1rem;
+    height: calc(100vh - 2.1rem - 4.5rem);
+    padding: 2rem 2.5rem;
+    border-left: 1px solid var(--mode-line-border);
+  }
+  .js .buffer-text figure.inline { display: none; }
+  .pane { display: none; width: 100%; }
+  .pane.shown { display: block; }
+  .pane img { width: 100%; border: 1px solid var(--border); }
+  .pane-caption { margin-top: 0.6rem; font-style: italic; font-size: 0.85em; color: var(--fg-dim); text-align: center; }
 }
 
 /* The buffer itself: one column, text and media the same width. */
@@ -153,6 +239,11 @@ h1, h2, h3 { font-family: var(--text); line-height: 1.25; margin: 3.5rem 0 1rem;
 h2 { font-size: 1.5em; }
 h3 { font-size: 1.2em; color: var(--blue); margin-top: 2.75rem; }
 h2::before { content: "* "; color: var(--fg-dim); font-weight: 400; }
+details.org > summary { list-style: none; cursor: pointer; }
+details.org > summary::-webkit-details-marker { display: none; }
+details.org > summary h2 { display: inline-block; }
+details.org:not([open]) > summary h2::after { content: " ..."; color: var(--fg-dim); font-weight: 400; }
+details.org > summary:focus-visible { outline: 2px solid var(--region); outline-offset: 4px; }
 h3::before { content: "** "; color: var(--fg-dim); font-weight: 400; }
 .heading-keys { float: right; font-weight: 400; margin-top: 0.15rem; }
 
@@ -177,3 +268,5 @@ dl.faq dd { margin: 0.25rem 0 0; }
 @media (max-width: 640px) {
   .heading-keys { float: none; display: block; margin: 0.25rem 0 0; }
 }
+
+.colophon { font-size: 0.8em; color: var(--fg-dim); }

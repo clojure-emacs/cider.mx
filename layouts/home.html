@@ -1,125 +1,177 @@
 {{ define "main" }}
+<script>document.documentElement.classList.add("js")</script>
 {{- $gh := partialCached "github.html" . }}
-<header class="mode-line">
-  <span>-:---</span>
-  <span class="buffer">cider.mx</span>
-  <span>Top</span>
-  <span>(Clojure CIDER {{ $gh.version }})</span>
+{{- $release := hugo.Data.release }}
+{{- $highlights := $release.highlights }}
+<header class="mode-line header-line">
+  <nav class="crumbs" aria-label="Current section">
+    <a href="#top" class="buffer">cider.mx</a><span class="crumb-trail" data-crumbs></span>
+  </nav>
   <span class="spacer"></span>
-  <a href="{{ site.Params.docs }}">manual</a>
-  <a href="#news">news</a>
-  <a href="{{ site.Params.github }}">github{{ with $gh.stars }} {{ if ge . 1000 }}{{ printf "%.1fk" (div (float .) 1000) }}{{ else }}{{ . }}{{ end }}&#9733;{{ end }}</a>
-  <button type="button" class="load-theme" aria-label="Switch between light and dark">M-x load-theme</button>
+  <a href="{{ site.Params.docs }}" data-echo="Read the CIDER manual at docs.cider.mx">manual</a>
+  <a href="#news" data-echo="Jump to the news">news</a>
+  <a href="{{ site.Params.github }}" data-echo="Visit CIDER on GitHub">github{{ with $gh.stars }} {{ if ge . 1000 }}{{ printf "%.1fk" (div (float .) 1000) }}{{ else }}{{ . }}{{ end }}&#9733;{{ end }}</a>
+  <button type="button" class="load-theme" data-echo="Switch between modus-operandi and modus-vivendi">M-x load-theme</button>
 </header>
 
-<main class="buffer-text">
-  <section class="opening">
-    <div class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</div>
-    <p class="comment">;; {{ .Params.tagline }}</p>
-    <p class="intro">{{ .Params.intro }}</p>
-    <div class="minibuffer" data-copy="{{ .Params.install }}">
-      <span class="prompt">M-x</span>
-      <span>{{ strings.TrimPrefix "M-x " .Params.install }}</span><span class="cursor">&nbsp;</span>
-      <button type="button">copy</button>
+<div class="frame" id="top">
+  <main class="window text-window">
+    <div class="buffer-text">
+      <section class="opening" data-pane="hero">
+        <div class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</div>
+        <p class="comment">;; {{ .Params.tagline }}</p>
+        <p class="intro">{{ .Params.intro }}</p>
+        <div class="minibuffer" data-copy="{{ .Params.install }}">
+          <span class="prompt">M-x</span>
+          <span>{{ strings.TrimPrefix "M-x " .Params.install }}</span><span class="cursor">&nbsp;</span>
+          <button type="button" data-echo="Copy the install command">copy</button>
+        </div>
+        <p class="version">Latest release: <a href="{{ $gh.releaseURL }}">{{ $gh.version }}</a>, and the
+          <a href="{{ $release.announcement }}">story behind {{ $release.series }}</a>.</p>
+      </section>
+
+      <details class="org" id="features" open>
+        <summary><h2>What it's like</h2></summary>
+        {{- range $i, $f := hugo.Data.showcase }}
+        <section class="feature" data-pane="feature-{{ $i }}">
+          <h3 id="feature-{{ $i }}">{{ $f.title }} <span class="heading-keys"><kbd>{{ $f.keys }}</kbd></span></h3>
+          <p>{{ $f.blurb }} <a class="more-link" href="{{ $f.docs }}">[manual]</a></p>
+          {{- if os.FileExists (printf "static/%s" $f.media) }}
+          <figure class="inline">
+            {{ partial "media.html" (dict "src" $f.media "alt" $f.alt) }}
+            {{- with $f.caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+          </figure>
+          {{- end }}
+        </section>
+        {{- end }}
+
+        <section data-pane="rest">
+          <h3 id="the-rest">And the rest</h3>
+          <p>Completion, documentation, navigation and friends all come from the running
+            program too. A few of the things that didn't fit above:</p>
+          <ul class="plain columns">
+            {{- range hugo.Data.features }}
+            <li><a href="{{ .docs }}">{{ .name }}</a></li>
+            {{- end }}
+          </ul>
+        </section>
+      </details>
+
+      <details class="org" id="news" open data-pane="news">
+        <summary><h2>News</h2></summary>
+        <ul class="news">
+          <li><time>latest</time><a href="{{ $gh.releaseURL }}">CIDER {{ $gh.version }} is the current release</a></li>
+          {{- range hugo.Data.news }}
+          <li><time datetime="{{ .date }}">{{ .date }}</time><a href="{{ .url }}">{{ .title }}</a></li>
+          {{- end }}
+        </ul>
+      </details>
+
+      <details class="org" id="history">
+        <summary><h2>Where it came from</h2></summary>
+        {{ .Content }}
+      </details>
+
+      <details class="org" id="get-started" open>
+        <summary><h2>Getting started</h2></summary>
+        <ol class="plain">
+          {{- range .Params.steps }}
+          <li>{{ . | safeHTML }}</li>
+          {{- end }}
+        </ol>
+        <p>Connecting to a REPL that's already running, in a container or on another
+          machine? <a href="https://docs.cider.mx/cider/basics/up_and_running.html">Up and Running</a> covers it.</p>
+      </details>
+
+      <details class="org" id="faq">
+        <summary><h2>Questions</h2></summary>
+        <dl class="faq">
+          {{- range hugo.Data.faq }}
+          <dt>{{ .q }}</dt>
+          <dd>{{ .a | safeHTML }}</dd>
+          {{- end }}
+        </dl>
+      </details>
+
+      <details class="org" id="community" open>
+        <summary><h2>Help and support</h2></summary>
+        <ul class="plain">
+          {{- range hugo.Data.community.help }}
+          <li><a href="{{ .url }}">{{ .name }}</a> - {{ .blurb }}</li>
+          {{- end }}
+        </ul>
+        <p class="support">If CIDER makes your work a little nicer every day, consider
+          supporting it:
+          {{ range $i, $s := hugo.Data.community.support }}{{ if $i }}, {{ end }}<a href="{{ $s.url }}">{{ $s.name }}</a>{{ end }}.
+          That's what keeps CIDER and friends
+          ({{ range $i, $e := hugo.Data.community.ecosystem }}{{ if $i }}, {{ end }}<a href="{{ $e.url }}">{{ $e.name }}</a>{{ end }})
+          going.</p>
+      </details>
+
+      <p class="signoff">{{ .Params.outro }}</p>
+      <p class="colophon">&copy; {{ replace site.Params.copyright "{year}" (string now.Year) }}
+        <a href="{{ site.Params.sourceRepo }}">Source</a>.</p>
     </div>
-    <p class="version">Latest release: <a href="{{ $gh.releaseURL }}">{{ $gh.version }}</a>, and the
-      <a href="{{ hugo.Data.release.announcement }}">story behind {{ hugo.Data.release.series }}</a>.</p>
-  </section>
+  </main>
 
-  <h2 id="features">What it's like</h2>
-  {{- range hugo.Data.showcase }}
-  <h3>{{ .title }} <span class="heading-keys"><kbd>{{ .keys }}</kbd></span></h3>
-  <p>{{ .blurb }} <a class="more-link" href="{{ .docs }}">[manual]</a></p>
-  {{- if os.FileExists (printf "static/%s" .media) }}
-  <figure>
-    {{ partial "media.html" (dict "src" .media "alt" .alt) }}
-    {{- with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
-  </figure>
-  {{- end }}
-  {{- end }}
-
-  <h3>And the rest</h3>
-  <p>Completion, documentation, navigation and friends all come from the running
-    program too. A few of the things that didn't fit above:</p>
-  <ul class="plain columns">
-    {{- range hugo.Data.features }}
-    <li><a href="{{ .docs }}">{{ .name }}</a></li>
+  {{- /* The other window: on wide screens it shows the media for whatever
+         section is being read. Without JavaScript it stays hidden and the
+         media shows inline instead. */}}
+  <aside class="window media-window" aria-label="Screencasts">
+    <div class="pane" data-pane-id="hero">
+      {{ partial "media.html" (dict "src" .Params.heroMedia "alt" .Params.heroAlt) }}
+      <p class="pane-caption">{{ .Params.heroAlt }}</p>
+    </div>
+    {{- range $i, $f := hugo.Data.showcase }}
+    {{- if os.FileExists (printf "static/%s" $f.media) }}
+    <div class="pane" data-pane-id="feature-{{ $i }}">
+      {{ partial "media.html" (dict "src" $f.media "alt" $f.alt) }}
+      <p class="pane-caption">{{ $f.caption }}</p>
+    </div>
     {{- end }}
-  </ul>
-
-  <h2 id="news">News</h2>
-  <ul class="news">
-    <li><time>latest</time><a href="{{ $gh.releaseURL }}">CIDER {{ $gh.version }} is the current release</a></li>
-    {{- range hugo.Data.news }}
-    <li><time datetime="{{ .date }}">{{ .date }}</time><a href="{{ .url }}">{{ .title }}</a></li>
     {{- end }}
-  </ul>
-
-  <h2 id="history">Where it came from</h2>
-  {{ .Content }}
-
-  <h2 id="get-started">Getting started</h2>
-  <ol class="plain">
-    {{- range .Params.steps }}
-    <li>{{ . | safeHTML }}</li>
+    {{- with index $highlights 3 }}
+    <div class="pane" data-pane-id="rest">
+      {{ partial "media.html" (dict "src" .media "alt" .title) }}
+      <p class="pane-caption">{{ .title }}: {{ .blurb }}</p>
+    </div>
     {{- end }}
-  </ol>
-  <p>Connecting to a REPL that's already running, in a container or on another
-    machine? <a href="https://docs.cider.mx/cider/basics/up_and_running.html">Up and Running</a> covers it.</p>
-
-  <h2 id="faq">Questions</h2>
-  <dl class="faq">
-    {{- range hugo.Data.faq }}
-    <dt>{{ .q }}</dt>
-    <dd>{{ .a | safeHTML }}</dd>
+    {{- with index $highlights 0 }}
+    <div class="pane" data-pane-id="news">
+      {{ partial "media.html" (dict "src" .media "alt" .title) }}
+      <p class="pane-caption">New in {{ $release.series }}: {{ .blurb }}</p>
+    </div>
     {{- end }}
-  </dl>
+  </aside>
+</div>
 
-  <h2 id="community">Help and support</h2>
-  <ul class="plain">
-    {{- range hugo.Data.community.help }}
-    <li><a href="{{ .url }}">{{ .name }}</a> - {{ .blurb }}</li>
-    {{- end }}
-  </ul>
-  <p class="support">If CIDER makes your work a little nicer every day, consider
-    supporting it:
-    {{ range $i, $s := hugo.Data.community.support }}{{ if $i }}, {{ end }}<a href="{{ $s.url }}">{{ $s.name }}</a>{{ end }}.
-    That's what keeps CIDER and friends
-    ({{ range $i, $e := hugo.Data.community.ecosystem }}{{ if $i }}, {{ end }}<a href="{{ $e.url }}">{{ $e.name }}</a>{{ end }})
-    going.</p>
-
-  <p class="signoff">{{ .Params.outro }}</p>
-</main>
-
-<footer>
+<footer class="minibuffer-area">
   <div class="mode-line bottom">
     <span>-:---</span>
     <span class="buffer">cider.mx</span>
-    <span>Bot</span>
+    <span class="position" data-position>Top</span>
+    <span>(Clojure CIDER {{ $gh.version }})</span>
     <span class="spacer"></span>
-    <span>&copy; {{ replace site.Params.copyright "{year}" (string now.Year) }}</span>
-    <a href="{{ site.Params.sourceRepo }}">source</a>
+    <span class="hint"><kbd>?</kbd> keys <kbd>M-x</kbd> commands</span>
   </div>
-  <p class="echo-area">Hacker fame is just cider-jack-in away!</p>
+  <div class="echo-area" data-echo-area aria-live="polite">Hacker fame is just cider-jack-in away!</div>
+  <div class="completions" data-completions hidden>
+    <ul role="listbox" data-candidates></ul>
+    <label class="mx-prompt"><span>M-x</span> <input type="text" data-mx-input autocomplete="off" spellcheck="false" aria-label="Command"></label>
+  </div>
+  <div class="which-key" data-which-key hidden>
+    <dl>
+      <dt><kbd>M-x</kbd> <kbd>:</kbd></dt><dd>run a command</dd>
+      <dt><kbd>n</kbd></dt><dd>next heading</dd>
+      <dt><kbd>p</kbd></dt><dd>previous heading</dd>
+      <dt><kbd>RET</kbd> on a heading</dt><dd>fold or unfold it</dd>
+      <dt><kbd>t</kbd></dt><dd>load-theme</dd>
+      <dt><kbd>?</kbd></dt><dd>this help</dd>
+      <dt><kbd>q</kbd> <kbd>C-g</kbd></dt><dd>quit</dd>
+    </dl>
+  </div>
 </footer>
 
-<script>
-  document.querySelector(".load-theme").addEventListener("click", function () {
-    var root = document.documentElement;
-    var dark = root.dataset.theme
-      ? root.dataset.theme === "dark"
-      : matchMedia("(prefers-color-scheme: dark)").matches;
-    root.dataset.theme = dark ? "light" : "dark";
-    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
-  });
-
-  document.querySelectorAll(".minibuffer button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      navigator.clipboard.writeText(b.parentElement.dataset.copy).then(function () {
-        b.textContent = "copied";
-        setTimeout(function () { b.textContent = "copy"; }, 1500);
-      });
-    });
-  });
-</script>
+{{- $js := resources.Get "js/emacs.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
 {{ end }}
