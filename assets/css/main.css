@@ -116,7 +116,8 @@ section { padding: 6rem 0; }
   border-bottom: 1px solid var(--border);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 3.75rem; }
-.brand { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; letter-spacing: 0.06em; color: var(--fg); text-decoration: none; }
+.brand { display: flex; align-items: center; color: var(--fg); }
+.brand svg { display: block; height: 30px; width: auto; }
 .nav nav { display: flex; align-items: center; gap: 1.4rem; }
 .nav nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; white-space: nowrap; }
 .nav nav a:hover { color: var(--fg); }
