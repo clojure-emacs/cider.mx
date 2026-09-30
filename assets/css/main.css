@@ -178,9 +178,8 @@ body { padding-bottom: 4.5rem; }
 @media (min-width: 1200px) {
   .js .frame { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
   .js .media-window {
-    display: flex;
+    display: grid;
     align-items: center;
-    justify-content: center;
     position: sticky;
     top: 2.1rem;
     height: calc(100vh - 2.1rem - 4.5rem);
@@ -188,8 +187,44 @@ body { padding-bottom: 4.5rem; }
     border-left: 1px solid var(--mode-line-border);
   }
   .js .buffer-text figure.inline { display: none; }
-  .pane { display: none; width: 100%; }
-  .pane.shown { display: block; }
+  /* Panes sit on top of each other, so switching buffers crossfades. */
+  .pane { grid-area: 1 / 1; width: 100%; opacity: 0; visibility: hidden; transition: opacity 0.25s, visibility 0.25s; }
+  .pane.shown { opacity: 1; visibility: visible; }
+  @media (prefers-reduced-motion: reduce) { .pane { transition: none; } }
+
+  /* The buffers that aren't screencasts: text in a window with its own
+     mode line. */
+  .buffer-pane { border: 1px solid var(--border); background: var(--bg); }
+  .buffer-body {
+    margin: 0;
+    padding: 1rem 1.25ch;
+    min-height: 20rem;
+    font: 17px/1.6 var(--mono);
+    white-space: pre-wrap;
+    color: var(--fg);
+  }
+  .buffer-body .comment { color: var(--fg-dim); }
+  .buffer-body .prompt { color: var(--blue); font-weight: 700; }
+  .buffer-body .date { color: var(--green); }
+  .buffer-body .who { color: var(--magenta); }
+  .buffer-body .heading { font-weight: 700; }
+  .buffer-body .key { color: var(--blue); }
+  .buffer-body .command { color: var(--magenta); }
+  .buffer-body .keyword { color: var(--magenta); }
+  .buffer-body .function { color: var(--blue); }
+  .buffer-body .string { color: var(--green); }
+  .buffer-body .cursor { background: var(--region); }
+  .pane-mode-line {
+    display: flex;
+    gap: 2ch;
+    padding: 0.15rem 1ch;
+    background: var(--mode-line-bg);
+    color: var(--mode-line-fg);
+    border-top: 1px solid var(--mode-line-border);
+    font: 14px/1.5 var(--mono);
+    white-space: nowrap;
+    overflow: hidden;
+  }
   .pane img { width: 100%; border: 1px solid var(--border); }
   .pane-caption { margin-top: 0.6rem; font-style: italic; font-size: 0.85em; color: var(--fg-dim); text-align: center; }
 }

@@ -1,0 +1,21 @@
+# The handful of bindings worth learning first, for the *Help* buffer.
+- key: C-c C-x j j
+  command: cider-jack-in-clj
+- key: C-c C-e
+  command: cider-eval-last-sexp
+- key: C-c C-c
+  command: cider-eval-defun-at-point
+- key: C-c C-k
+  command: cider-load-buffer
+- key: C-c C-z
+  command: cider-switch-to-repl-buffer
+- key: M-.
+  command: cider-find-var
+- key: C-c C-d d
+  command: cider-doc
+- key: C-c M-i
+  command: cider-inspect
+- key: C-c C-t
+  command: cider-test-menu
+- key: C-c C-w
+  command: cider-references-menu

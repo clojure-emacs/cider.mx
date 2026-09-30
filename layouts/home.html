@@ -67,12 +67,12 @@
         </ul>
       </details>
 
-      <details class="org" id="history">
+      <details class="org" id="history" data-pane="history">
         <summary><h2>Where it came from</h2></summary>
         {{ .Content }}
       </details>
 
-      <details class="org" id="get-started" open>
+      <details class="org" id="get-started" open data-pane="repl">
         <summary><h2>Getting started</h2></summary>
         <ol class="plain">
           {{- range .Params.steps }}
@@ -83,7 +83,7 @@
           machine? <a href="https://docs.cider.mx/cider/basics/up_and_running.html">Up and Running</a> covers it.</p>
       </details>
 
-      <details class="org" id="faq">
+      <details class="org" id="faq" data-pane="help">
         <summary><h2>Questions</h2></summary>
         <dl class="faq">
           {{- range hugo.Data.faq }}
@@ -93,7 +93,7 @@
         </dl>
       </details>
 
-      <details class="org" id="community" open>
+      <details class="org" id="community" open data-pane="scratch">
         <summary><h2>Help and support</h2></summary>
         <ul class="plain">
           {{- range hugo.Data.community.help }}
@@ -142,6 +142,52 @@
       <p class="pane-caption">New in {{ $release.series }}: {{ .blurb }}</p>
     </div>
     {{- end }}
+    {{- /* The rest of the page has no screencasts, so the other window shows
+           the Emacs buffer that fits each section instead. */}}
+    <div class="pane buffer-pane" data-pane-id="history">
+      <pre class="buffer-body">
+{{- range hugo.Data.milestones }}
+<span class="date">{{ .date }}</span>  {{ .what }}  <span class="who">{{ .who }}</span>
+{{- end }}</pre>
+      <div class="pane-mode-line"><span>-:%%-</span> <b>magit-log: cider</b> <span>Top</span> <span>(Magit Log)</span></div>
+    </div>
+    <div class="pane buffer-pane" data-pane-id="repl">
+      <pre class="buffer-body"><span class="comment">;; Connected to nREPL server - nrepl://localhost:54321
+;; CIDER {{ $gh.version }}, nREPL 1.7.0
+;; Clojure 1.12.5, Java 21.0.8
+;;
+;; New to CIDER?  C-c C-h for a REPL reference, M-x cider-view-manual for the manual.</span>
+<span class="prompt">user&gt;</span> (+ 1 2)
+3
+<span class="prompt">user&gt;</span> (map inc [1 2 3])
+(2 3 4)
+<span class="prompt">user&gt;</span> <span class="cursor"> </span></pre>
+      <div class="pane-mode-line"><span>U:**-</span> <b>*cider-repl demo:localhost:54321(clj)*</b> <span>Bot</span> <span>(REPL)</span></div>
+    </div>
+    <div class="pane buffer-pane" data-pane-id="help">
+      <pre class="buffer-body">cider-mode bindings worth learning first:
+
+<span class="heading">key             binding</span>
+<span class="heading">---             -------</span>
+{{- range hugo.Data.essential_keys }}
+<span class="key">{{ printf "%-15s" .key }}</span> <span class="command">{{ .command }}</span>
+{{- end }}
+
+Everything else: C-c C-x, C-c C-t, C-c C-d and friends
+all open menus that list what they can do.</pre>
+      <div class="pane-mode-line"><span>U:%%-</span> <b>*Help*</b> <span>All</span> <span>(Help)</span></div>
+    </div>
+    <div class="pane buffer-pane" data-pane-id="scratch">
+      <pre class="buffer-body"><span class="comment">;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.</span>
+
+(<span class="keyword">defun</span> <span class="function">keep-hacking</span> ()
+  <span class="string">"Thanks for reading all the way down here."</span>
+  (<span class="keyword">interactive</span>)
+  (cider-jack-in-clj nil))
+<span class="cursor"> </span></pre>
+      <div class="pane-mode-line"><span>-:---</span> <b>*scratch*</b> <span>All</span> <span>(Lisp Interaction)</span></div>
+    </div>
   </aside>
 </div>
 

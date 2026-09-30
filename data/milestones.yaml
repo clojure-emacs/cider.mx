@@ -1,0 +1,31 @@
+# From the History page of the manual, shown as a log in the other window.
+- date: 2012-04-17
+  who: Phil Hagelberg
+  what: Initial commit of nrepl.el
+- date: 2012-04-24
+  who: Tim King
+  what: Pick up Phil's prototype
+- date: 2012-07-10
+  who: Tim King
+  what: Release nrepl.el 0.1.0
+- date: 2012-08-21
+  who: Phil Hagelberg
+  what: Deprecate swank-clojure in favour of nrepl.el
+- date: 2013-08-08
+  who: Bozhidar Batsov
+  what: First release under new stewardship (0.1.8)
+- date: 2013-10-28
+  who: Bozhidar Batsov
+  what: Rename nrepl.el to CIDER, release 0.3
+- date: 2014-08-05
+  who: Bozhidar Batsov
+  what: CIDER 0.7 leans on cider-nrepl
+- date: 2015-06-16
+  who: Bozhidar Batsov
+  what: CIDER 0.9 adds the debugger
+- date: 2018-05-04
+  who: Bozhidar Batsov
+  what: Orchard 0.1
+- date: 2026-07-15
+  who: Bozhidar Batsov
+  what: CIDER 2.0

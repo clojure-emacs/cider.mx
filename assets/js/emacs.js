@@ -73,7 +73,12 @@
   var headerHeight = function () { return $(".header-line").offsetHeight; };
   // The reading line: whatever crosses it is "the current section", for the
   // breadcrumbs and the other window alike, so the two always agree.
-  var readingLine = function () { return headerHeight() + window.innerHeight * 0.2; };
+  // At the very bottom the last sections can't scroll up to it, so there the
+  // whole window counts.
+  var readingLine = function () {
+    var atBottom = window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 2;
+    return atBottom ? window.innerHeight : headerHeight() + window.innerHeight * 0.2;
+  };
 
   function reveal(el) {
     var details = el.closest("details");
