@@ -1,38 +1,45 @@
-# The flagship features, shown as alternating rows with a GIF each.
-# `keys` is the binding that does the thing, shown next to the title.
-- title: Evaluate anything, see the result where you are
+# The flagship features, each with a GIF and a caption saying what it shows.
+- title: Evaluate anything
   keys: C-c C-e
   blurb: >-
-    Send a form, a definition or the whole buffer to your running program and
-    the result appears inline, right next to the code. No copy-pasting into a
-    REPL, no restarts.
+    This is the whole idea. Put the cursor after a form, press the key, and the
+    result shows up right next to the code. A definition, a region, the whole
+    buffer - it all goes to your running program, and nothing gets restarted.
+    If the result is an image, you get the image.
   media: media/cider-eval.gif
   alt: Evaluating Clojure forms one by one, each result appearing inline next to its form
+  caption: Five forms, five results, no REPL window in sight.
   docs: https://docs.cider.mx/cider/usage/code_evaluation.html
 
-- title: Take any value apart
+- title: Take values apart
   keys: C-c M-i
   blurb: >-
-    The inspector lets you walk any value in the running program: drill into
-    nested data, page through huge collections and jump back out.
+    Printed values only get you so far. The inspector lets you walk any value
+    in the running program: drill into a nested map, page through a
+    collection with a million entries, and back out again.
   media: media/inspector.gif
   alt: Inspecting the result of group-by and drilling into a nested map
+  caption: From a group-by result down to one user's map, and back.
   docs: https://docs.cider.mx/cider/debugging/inspector.html
 
-- title: Step through code as it runs
+- title: Step through it
   keys: C-u C-M-x
   blurb: >-
-    Instrument a function and the next call stops in the debugger, showing each
-    intermediate value as you step through it, Edebug-style.
+    Instrument a function and the next call to it stops in the debugger. Each
+    intermediate value shows up inline as you step. If you've used Edebug,
+    you already know how this works.
   media: media/debugger.gif
   alt: Stepping through a thread-last pipeline in the debugger, with each value shown inline
+  caption: Stepping through a thread-last pipeline, one value at a time.
   docs: https://docs.cider.mx/cider/debugging/debugger.html
 
-- title: Tests without leaving the editor
+- title: Run the tests
   keys: C-c C-t n
   blurb: >-
-    Run a test, a namespace or the whole project. Failures come with a diff of
-    expected against actual, and rerunning just the failures is one key away.
+    Run the test at point, the namespace or the whole project. When something
+    fails you get expected, actual and a diff between the two, so you don't
+    have to squint at two nearly identical maps.
   media: media/tests.gif
   alt: Running a namespace's tests and getting a report with the failing assertion
+  caption: One failure, with a diff that points at the difference.
   docs: https://docs.cider.mx/cider/testing/running_tests.html

@@ -1,41 +1,39 @@
-/* CIDER's colors, built around the yellow of its logo. Each token has a
-   light value and a --dark- counterpart for the dark theme. */
+/* Colors from Emacs's own Modus themes: modus-operandi for light and
+   modus-vivendi for dark. The yellow of CIDER's logo is the one accent, used
+   where Emacs would use the region or the cursor. Each token has a --dark-
+   counterpart that main.css swaps in. */
 :root {
-  --bg: #fcfbf7;
-  --bg-alt: #f4f1e6;
-  --fg: #1b1b1f;
-  --muted: #5d5b55;
-  --faint: #8a877d;
-  --accent: #ffd55f;
-  --accent-strong: #f5b700;
-  --accent-ink: #1b1b1f;
-  --link: #8a5a00;
-  --border: #e6e1d0;
-  --card: #ffffff;
-  --grid: rgb(27 27 31 / 0.045);
-  --glow: rgb(255 213 95 / 0.28);
-  --glow-soft: rgb(255 213 95 / 0.18);
+  --bg: #ffffff;
+  --bg-dim: #f2f2f2;
+  --fg: #000000;
+  --fg-dim: #595959;
+  --border: #9f9f9f;
+  --blue: #0031a9;
+  --magenta: #721045;
+  --green: #006800;
+  --cyan: #005e8b;
+  --link: #3548cf;
+  --mode-line-bg: #c8c8c8;
+  --mode-line-fg: #000000;
+  --mode-line-border: #5a5a5a;
+  --region: #ffd55f;
+  --region-fg: #000000;
+  --key-bg: #f2f2f2;
 
-  /* the release band is dark in both themes */
-  --band-bg: #16161a;
-  --band-fg: #ecebe6;
-  --band-muted: #a8a69e;
-  --band-card: #1f1f25;
-  --band-border: #2e2e36;
-
-  --dark-bg: #111114;
-  --dark-bg-alt: #17171b;
-  --dark-fg: #ecebe6;
-  --dark-muted: #a8a69e;
-  --dark-faint: #7d7b74;
-  --dark-accent: #ffd55f;
-  --dark-accent-strong: #f5b700;
-  --dark-link: #ffd55f;
-  --dark-border: #2a2a31;
-  --dark-card: #1a1a1f;
-  --dark-grid: rgb(255 255 255 / 0.035);
-  --dark-glow: rgb(255 213 95 / 0.28);
-  --dark-glow-soft: rgb(255 213 95 / 0.18);
-  --dark-band-bg: #0b0b0d;
-  --dark-band-card: #17171b;
+  --dark-bg: #000000;
+  --dark-bg-dim: #1e1e1e;
+  --dark-fg: #ffffff;
+  --dark-fg-dim: #989898;
+  --dark-border: #646464;
+  --dark-blue: #2fafff;
+  --dark-magenta: #feacd0;
+  --dark-green: #44bc44;
+  --dark-cyan: #00d3d0;
+  --dark-link: #79a8ff;
+  --dark-mode-line-bg: #505050;
+  --dark-mode-line-fg: #ffffff;
+  --dark-mode-line-border: #959595;
+  --dark-region: #ffd55f;
+  --dark-region-fg: #000000;
+  --dark-key-bg: #1e1e1e;
 }

@@ -1,46 +1,36 @@
 ---
 tagline: The Clojure Interactive Development Environment that Rocks
-lead: >-
-  CIDER turns Emacs into a live window into your running Clojure program.
-  Evaluate code as you write it, poke at the results, debug and run your
-  tests, all without restarting anything.
+intro: >-
+  CIDER hooks Emacs up to your running Clojure program. You write a function,
+  evaluate it, poke at what comes back and keep going. No restarts, no
+  copy-pasting into a REPL window, no waiting on a build. It's been doing
+  that since 2012.
 install: M-x package-install RET cider RET
 heroMedia: media/cider-eval.gif
 heroAlt: Evaluating Clojure forms one by one with C-c C-e, each result appearing inline next to its form
-featuresTitle: Everything happens against the running program
-
-pillars:
-  - title: Live
-    blurb: >-
-      You build the program up while it runs, re-evaluating definitions and
-      trying things out as you go. You never stop and restart it.
-  - title: Knows your program
-    blurb: >-
-      Completion, docs, navigation and the debugger all ask the running
-      program over nREPL, instead of guessing from the source.
-  - title: Everywhere Clojure runs
-    blurb: >-
-      Clojure, ClojureScript, Babashka, nbb, Basilisp and ClojureCLR, on your
-      machine, in a container or on a remote server.
 
 steps:
-  - title: Install
-    body: >-
-      CIDER is on NonGNU ELPA, which Emacs enables out of the box:
-      <kbd>M-x package-install RET cider RET</kbd>
-  - title: Jack in
-    body: >-
-      Open a file in your Clojure project, press <kbd>C-c C-x</kbd>, then
-      <kbd>j j</kbd>. CIDER starts your project's REPL and connects to it.
-  - title: Evaluate
-    body: >-
-      Put the cursor after a form and press <kbd>C-c C-e</kbd>. The result
-      shows up right next to the code.
+  - >-
+    Install it. CIDER is on NonGNU ELPA, which Emacs knows about out of the
+    box, so <kbd>M-x package-install RET cider RET</kbd> is all it takes.
+  - >-
+    Open any file in a Clojure project and press <kbd>C-c C-x</kbd>, then
+    <kbd>j j</kbd>. CIDER figures out whether it's a Clojure CLI, Leiningen,
+    shadow-cljs or Babashka project, starts a REPL and connects to it.
+  - >-
+    Put the cursor after a form and press <kbd>C-c C-e</kbd>. That's the
+    loop. Everything else builds on it.
+
+outro: Keep hacking!
 ---
 
-If you've used SLIME or SLY with Common Lisp, Geiser with Scheme or Emacs Lisp
-itself, CIDER will feel like home.
+Phil Hagelberg hacked together the first nREPL client for Emacs on a flight to
+San Francisco in April 2012. Tim King picked it up, and by August `nrepl.el`
+had pushed SLIME aside as the way to write Clojure in Emacs. I took it over in
+2013 and renamed it to CIDER a few months later, mostly so people would stop
+confusing it with the nREPL server.
 
-Connecting to a REPL that's already running, in a container or on another
-machine? [Up and Running](https://docs.cider.mx/cider/basics/up_and_running.html)
-has you covered.
+Fourteen years on, CIDER is on its second major version and still changing
+more than most tools half its age. It's built by
+[hundreds of contributors](https://github.com/clojure-emacs/cider/graphs/contributors)
+and funded by the people who use it.

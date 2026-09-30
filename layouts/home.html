@@ -1,0 +1,125 @@
+{{ define "main" }}
+{{- $gh := partialCached "github.html" . }}
+<header class="mode-line">
+  <span>-:---</span>
+  <span class="buffer">cider.mx</span>
+  <span>Top</span>
+  <span>(Clojure CIDER {{ $gh.version }})</span>
+  <span class="spacer"></span>
+  <a href="{{ site.Params.docs }}">manual</a>
+  <a href="#news">news</a>
+  <a href="{{ site.Params.github }}">github{{ with $gh.stars }} {{ if ge . 1000 }}{{ printf "%.1fk" (div (float .) 1000) }}{{ else }}{{ . }}{{ end }}&#9733;{{ end }}</a>
+  <button type="button" class="load-theme" aria-label="Switch between light and dark">M-x load-theme</button>
+</header>
+
+<main class="buffer-text">
+  <section class="opening">
+    <div class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</div>
+    <p class="comment">;; {{ .Params.tagline }}</p>
+    <p class="intro">{{ .Params.intro }}</p>
+    <div class="minibuffer" data-copy="{{ .Params.install }}">
+      <span class="prompt">M-x</span>
+      <span>{{ strings.TrimPrefix "M-x " .Params.install }}</span><span class="cursor">&nbsp;</span>
+      <button type="button">copy</button>
+    </div>
+    <p class="version">Latest release: <a href="{{ $gh.releaseURL }}">{{ $gh.version }}</a>, and the
+      <a href="{{ hugo.Data.release.announcement }}">story behind {{ hugo.Data.release.series }}</a>.</p>
+  </section>
+
+  <h2 id="features">What it's like</h2>
+  {{- range hugo.Data.showcase }}
+  <h3>{{ .title }} <span class="heading-keys"><kbd>{{ .keys }}</kbd></span></h3>
+  <p>{{ .blurb }} <a class="more-link" href="{{ .docs }}">[manual]</a></p>
+  {{- if os.FileExists (printf "static/%s" .media) }}
+  <figure>
+    {{ partial "media.html" (dict "src" .media "alt" .alt) }}
+    {{- with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+  {{- end }}
+
+  <h3>And the rest</h3>
+  <p>Completion, documentation, navigation and friends all come from the running
+    program too. A few of the things that didn't fit above:</p>
+  <ul class="plain columns">
+    {{- range hugo.Data.features }}
+    <li><a href="{{ .docs }}">{{ .name }}</a></li>
+    {{- end }}
+  </ul>
+
+  <h2 id="news">News</h2>
+  <ul class="news">
+    <li><time>latest</time><a href="{{ $gh.releaseURL }}">CIDER {{ $gh.version }} is the current release</a></li>
+    {{- range hugo.Data.news }}
+    <li><time datetime="{{ .date }}">{{ .date }}</time><a href="{{ .url }}">{{ .title }}</a></li>
+    {{- end }}
+  </ul>
+
+  <h2 id="history">Where it came from</h2>
+  {{ .Content }}
+
+  <h2 id="get-started">Getting started</h2>
+  <ol class="plain">
+    {{- range .Params.steps }}
+    <li>{{ . | safeHTML }}</li>
+    {{- end }}
+  </ol>
+  <p>Connecting to a REPL that's already running, in a container or on another
+    machine? <a href="https://docs.cider.mx/cider/basics/up_and_running.html">Up and Running</a> covers it.</p>
+
+  <h2 id="faq">Questions</h2>
+  <dl class="faq">
+    {{- range hugo.Data.faq }}
+    <dt>{{ .q }}</dt>
+    <dd>{{ .a | safeHTML }}</dd>
+    {{- end }}
+  </dl>
+
+  <h2 id="community">Help and support</h2>
+  <ul class="plain">
+    {{- range hugo.Data.community.help }}
+    <li><a href="{{ .url }}">{{ .name }}</a> - {{ .blurb }}</li>
+    {{- end }}
+  </ul>
+  <p class="support">If CIDER makes your work a little nicer every day, consider
+    supporting it:
+    {{ range $i, $s := hugo.Data.community.support }}{{ if $i }}, {{ end }}<a href="{{ $s.url }}">{{ $s.name }}</a>{{ end }}.
+    That's what keeps CIDER and friends
+    ({{ range $i, $e := hugo.Data.community.ecosystem }}{{ if $i }}, {{ end }}<a href="{{ $e.url }}">{{ $e.name }}</a>{{ end }})
+    going.</p>
+
+  <p class="signoff">{{ .Params.outro }}</p>
+</main>
+
+<footer>
+  <div class="mode-line bottom">
+    <span>-:---</span>
+    <span class="buffer">cider.mx</span>
+    <span>Bot</span>
+    <span class="spacer"></span>
+    <span>&copy; {{ replace site.Params.copyright "{year}" (string now.Year) }}</span>
+    <a href="{{ site.Params.sourceRepo }}">source</a>
+  </div>
+  <p class="echo-area">Hacker fame is just cider-jack-in away!</p>
+</footer>
+
+<script>
+  document.querySelector(".load-theme").addEventListener("click", function () {
+    var root = document.documentElement;
+    var dark = root.dataset.theme
+      ? root.dataset.theme === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("theme", root.dataset.theme); } catch (e) {}
+  });
+
+  document.querySelectorAll(".minibuffer button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      navigator.clipboard.writeText(b.parentElement.dataset.copy).then(function () {
+        b.textContent = "copied";
+        setTimeout(function () { b.textContent = "copy"; }, 1500);
+      });
+    });
+  });
+</script>
+{{ end }}
