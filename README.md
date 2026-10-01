@@ -42,6 +42,20 @@ colors.
   `fallbackVersion` in `hugo.toml`, which is only used when GitHub can't be
   reached during the build.
 
+## Re-recording the screencasts
+
+The GIFs and screenshots in `static/media/` are recorded by scripts in
+`capture/`: a real Emacs talking to a real REPL running the demo project in
+`capture/project/`. With a CIDER checkout, the Clojure CLI, a GUI Emacs and
+ImageMagick around:
+
+```sh
+CIDER_DIR=~/projects/cider ./capture/run.sh
+```
+
+A small Emacs frame takes over the screen for a couple of minutes, so don't
+type while it's up.
+
 ## Running it locally
 
 ```sh
