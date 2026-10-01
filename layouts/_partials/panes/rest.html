@@ -1,0 +1,3 @@
+{{- with index hugo.Data.release.highlights 2 }}
+{{ partial "pane-media.html" (dict "src" .media "alt" .title "caption" (printf "%s: %s" .title .blurb)) }}
+{{- end }}

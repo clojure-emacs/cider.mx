@@ -10,8 +10,9 @@ help:
     blurb: Bugs and feature requests.
 
 supportBlurb: >-
-  CIDER is built by volunteers and funded by its users. If it saves you time,
-  consider chipping in.
+  CIDER is free, but keeping it going takes a lot of time. If it makes your
+  work a little nicer every day, consider chipping in:
+ecosystemIntro: "That money also keeps CIDER's siblings going:"
 
 # The funding platforms; the recommended ones come first.
 support:

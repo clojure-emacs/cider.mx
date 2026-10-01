@@ -1,0 +1,5 @@
+{{- $body := `<span class="comment">;; M-x package-install RET cider RET</span>
+Contacting host: elpa.nongnu.org:443
+Package refresh done
+Package ‘cider’ installed.` }}
+{{ partial "buffer.html" (dict "name" "*Messages*" "mode" "Messages" "state" "U:%*-" "position" "Bot" "body" $body) }}

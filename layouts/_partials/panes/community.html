@@ -1,0 +1,9 @@
+{{- $body := `<span class="comment">;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.</span>
+
+(<span class="keyword">defun</span> <span class="function">keep-hacking</span> ()
+  <span class="string">"Thanks for reading all the way down here."</span>
+  (<span class="keyword">interactive</span>)
+  (cider-jack-in-clj nil))
+<span class="cursor"> </span>` }}
+{{ partial "buffer.html" (dict "name" "*scratch*" "mode" "Lisp Interaction" "body" $body) }}

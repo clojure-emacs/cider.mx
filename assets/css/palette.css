@@ -13,6 +13,7 @@
   --green: #006800;
   --cyan: #005e8b;
   --link: #3548cf;
+  --accent: #ffd55f;
   --mode-line-bg: #c8c8c8;
   --mode-line-fg: #000000;
   --mode-line-border: #5a5a5a;
@@ -30,6 +31,7 @@
   --dark-green: #44bc44;
   --dark-cyan: #00d3d0;
   --dark-link: #79a8ff;
+  --dark-accent: #ffd55f;
   --dark-mode-line-bg: #505050;
   --dark-mode-line-fg: #ffffff;
   --dark-mode-line-border: #959595;

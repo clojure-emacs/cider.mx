@@ -1,0 +1,6 @@
+{{- $lines := slice "cider-mode bindings worth learning first:" "" `<span class="heading">key             binding</span>` `<span class="heading">---             -------</span>` }}
+{{- range hugo.Data.essential_keys }}
+  {{- $lines = $lines | append (printf `<span class="key">%-15s</span> <span class="command">%s</span>` .key .command) }}
+{{- end }}
+{{- $lines = $lines | append "" "Everything else: C-c C-x, C-c C-t, C-c C-d and friends" "all open menus that list what they can do." }}
+{{ partial "buffer.html" (dict "name" "*Help*" "mode" "Help" "state" "U:%%-" "position" "All" "body" (delimit $lines "\n")) }}

@@ -1,0 +1,6 @@
+{{- /* The project's milestones, from the manual's History page, as a log. */ -}}
+{{- $lines := slice }}
+{{- range hugo.Data.milestones }}
+  {{- $lines = $lines | append (printf `<span class="date">%s</span>  %s  <span class="who">%s</span>` .date .what .who) }}
+{{- end }}
+{{ partial "buffer.html" (dict "name" "magit-log: cider" "mode" "Magit Log" "state" "-:%%-" "position" "Top" "body" (delimit $lines "\n")) }}

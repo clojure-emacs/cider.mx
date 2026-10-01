@@ -13,6 +13,9 @@ ignoreLogs = ["github-fetch", "news-feed"]
 
 [params]
   name = "CIDER"
+  buffer = "cider.mx"
+  modeName = "Clojure CIDER"
+  echo = "Hacker fame is just cider-jack-in away!"
   logo = "img/cider-logo.svg"
   logoStyle = "wordmark"
   sourceRepo = "https://github.com/clojure-emacs/cider.mx"

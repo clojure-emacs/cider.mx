@@ -21,6 +21,13 @@ steps:
     Put the cursor after a form and press <kbd>C-c C-e</kbd>. That's the
     loop. Everything else builds on it.
 
+restIntro: >-
+  Completion, documentation, navigation and friends all come from the running
+  program too. A few of the things that didn't fit above:
+stepsNote: >-
+  Connecting to a REPL that's already running, in a container or on another
+  machine? [Up and Running](https://docs.cider.mx/cider/basics/up_and_running.html)
+  covers it.
 outro: Keep hacking!
 ---
 

@@ -1,0 +1,14 @@
+{{- /* CIDER's real REPL banner. Only the CIDER version is live; the rest are
+       example versions. */ -}}
+{{- $gh := partialCached "github.html" . }}
+{{- $body := printf `<span class="comment">;; Connected to nREPL server - nrepl://localhost:54321
+;; CIDER %s, nREPL 1.7.0
+;; Clojure 1.12.5, Java 21.0.8
+;;
+;; New to CIDER?  C-c C-h for a REPL reference, M-x cider-view-manual for the manual.</span>
+<span class="prompt">user&gt;</span> (+ 1 2)
+3
+<span class="prompt">user&gt;</span> (map inc [1 2 3])
+(2 3 4)
+<span class="prompt">user&gt;</span> <span class="cursor"> </span>` $gh.version }}
+{{ partial "buffer.html" (dict "name" "*cider-repl demo:localhost:54321(clj)*" "mode" "REPL" "state" "U:**-" "position" "Bot" "body" $body) }}
