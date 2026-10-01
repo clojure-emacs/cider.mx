@@ -1,18 +1,18 @@
 help:
   - name: GitHub Discussions
     url: https://github.com/clojure-emacs/cider/discussions
-    blurb: Questions, ideas and show-and-tell.
+    blurb: Questions, ideas and general discussions.
   - name: "#cider on Clojurians Slack"
     url: http://clojurians.net/
-    blurb: Very active, and the quickest way to get unstuck.
+    blurb: Very active, and the best place to get help quickly.
   - name: Issue tracker
     url: https://github.com/clojure-emacs/cider/issues
     blurb: Bugs and feature requests.
 
 supportBlurb: >-
-  CIDER is free, but keeping it going takes a lot of time. If it makes your
-  work a little nicer every day, consider chipping in:
-ecosystemIntro: "That money also keeps CIDER's siblings going:"
+  CIDER is free, but maintaining it takes a lot of time and effort. If you
+  find it useful, please consider supporting its development:
+ecosystemIntro: "Your support also helps CIDER's sibling projects:"
 
 # The funding platforms; the recommended ones come first.
 support:
@@ -23,7 +23,7 @@ support:
   - name: Open Collective
     url: https://opencollective.com/cider
     recommended: true
-    blurb: every expense is public, and it's the easy route for companies
+    blurb: fully transparent, and the easiest option for companies
   - name: Patreon
     url: https://www.patreon.com/bbatsov
     blurb: monthly memberships

@@ -2,13 +2,13 @@
 - title: Evaluate anything
   keys: C-c C-e
   blurb: >-
-    This is the whole idea. Put the cursor after a form, press the key, and the
-    result shows up right next to the code. A definition, a region, the whole
+    This is the heart of CIDER. Put the cursor after a form, press the key, and
+    the result shows up right next to the code. A definition, a region, the whole
     buffer - it all goes to your running program, and nothing gets restarted.
     If the result is an image, you get the image.
   media: media/cider-eval.gif
   alt: Evaluating Clojure forms one by one, each result appearing inline next to its form
-  caption: Five forms, five results, no REPL window in sight.
+  caption: Five forms evaluated without leaving the source buffer.
   docs: https://docs.cider.mx/cider/usage/code_evaluation.html
 
 - title: Take values apart
@@ -36,9 +36,9 @@
 - title: Expand macros in place
   keys: C-c M-m e
   blurb: >-
-    Macros are much less mysterious when you can watch them unfold. Expand
-    one a step at a time right where it is in the source, keep expanding
-    the parts you're curious about, and collapse it all when you're done.
+    Macros are much easier to understand when you can see what they expand
+    to. Expand one a step at a time right in the source buffer, keep expanding
+    the parts you're interested in, and collapse everything when you're done.
   media: media/macrostep.webp
   alt: A thread-last macro expanded in place into the reduce and map calls it stands for
   caption: The ->> in total-price, expanded in place.
@@ -69,9 +69,9 @@
   keys: C-c C-t n
   blurb: >-
     Run the test at point, the namespace or the whole project. When something
-    fails you get expected, actual and a diff between the two, so you don't
-    have to squint at two nearly identical maps.
+    fails you get the expected and actual values and a diff between them, so
+    you don't have to compare two big maps by hand.
   media: media/tests.gif
   alt: Running a namespace's tests and getting a report with the failing assertion
-  caption: One failure, with a diff that points at the difference.
+  caption: A failing test, with a diff of the expected and actual values.
   docs: https://docs.cider.mx/cider/testing/running_tests.html
