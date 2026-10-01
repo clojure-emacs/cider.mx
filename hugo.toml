@@ -1,11 +1,11 @@
 baseURL = "https://cider.mx/"
 locale = "en-US"
 title = "CIDER - the Clojure Interactive Development Environment that Rocks"
-disableKinds = ["taxonomy", "term", "section", "RSS", "sitemap", "404"]
+disableKinds = ["taxonomy", "term", "section", "RSS", "sitemap"]
 
 # A GitHub API hiccup shouldn't fail the deploy (CI builds with
 # --panicOnWarning); the fallback version covers it.
-ignoreLogs = ["github-fetch"]
+ignoreLogs = ["github-fetch", "news-feed"]
 
 [module]
   [[module.imports]]
@@ -24,6 +24,10 @@ ignoreLogs = ["github-fetch"]
   socialImage = "img/social.png"
   # Used only when GitHub can't be reached at build time.
   fallbackVersion = "2.0.1"
+  # News: posts with this tag in the feed, merged with data/news.yaml.
+  newsFeed = "https://metaredux.com/feed.xml"
+  newsTag = "CIDER"
+  newsCount = 8
 
 [caches.getresource]
   # the release and star count are fetched from GitHub; don't keep them forever

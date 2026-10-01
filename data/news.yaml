@@ -1,4 +1,6 @@
-# Recent writing about CIDER, newest first. Release announcements go here too.
+# The news archive. Posts tagged CIDER in the Meta Redux feed are picked up
+# automatically when the site is built; add one here to keep it in the list
+# for good, or for news from anywhere else.
 - date: 2026-08-29
   title: Smarter Form Targeting Is Not Coming to CIDER
   url: https://metaredux.com/posts/2026/08/29/smarter-form-targeting-is-not-coming-to-cider.html

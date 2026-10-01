@@ -14,6 +14,14 @@
   var defaultEcho = echoArea.textContent;
   var echoTimer;
 
+  // What hovering shows only goes to the echo area; the results of actions
+  // are also announced to screen readers.
+  var announcer = $("[data-announce]");
+  function announce(message) {
+    announcer.textContent = message;
+    echo(message);
+  }
+
   function echo(message, sticky) {
     clearTimeout(echoTimer);
     echoArea.textContent = message;
@@ -44,7 +52,7 @@
   function loadTheme(theme) {
     root.dataset.theme = theme;
     try { localStorage.setItem("theme", theme); } catch (e) {}
-    echo("Loading theme modus-" + (theme === "dark" ? "vivendi" : "operandi") + "...done");
+    announce("Loading theme modus-" + (theme === "dark" ? "vivendi" : "operandi") + "...done");
   }
 
   function toggleTheme() {
@@ -58,7 +66,7 @@
   function copyInstall() {
     var box = $(".minibuffer");
     navigator.clipboard.writeText(box.dataset.copy).then(function () {
-      echo("Copied “" + box.dataset.copy + "” to the kill ring");
+      announce("Copied “" + box.dataset.copy + "” to the kill ring");
     });
   }
 
@@ -159,7 +167,7 @@
 
   function foldAll(open) {
     $$("details.org").forEach(function (d) { d.open = open; });
-    echo(open ? "SHOW ALL" : "OVERVIEW");
+    announce(open ? "SHOW ALL" : "OVERVIEW");
   }
 
   // --- M-x -----------------------------------------------------------------
@@ -203,6 +211,7 @@
     matches.forEach(function (c, i) {
       var li = document.createElement("li");
       li.setAttribute("role", "option");
+      li.id = "mx-candidate-" + i;
       if (i === selected) li.setAttribute("aria-selected", "true");
       var name = document.createElement("span");
       name.textContent = c.name;
@@ -214,6 +223,8 @@
       li.addEventListener("mousedown", function (e) { e.preventDefault(); run(c); });
       list.appendChild(li);
     });
+    if (matches.length) input.setAttribute("aria-activedescendant", "mx-candidate-" + selected);
+    else input.removeAttribute("aria-activedescendant");
     if (!matches.length) {
       var none = document.createElement("li");
       none.className = "none";
@@ -225,6 +236,7 @@
   function openMx() {
     toggleWhichKey(false);
     completions.hidden = false;
+    input.setAttribute("aria-expanded", "true");
     input.value = "";
     selected = 0;
     render();
@@ -233,6 +245,7 @@
 
   function closeMx() {
     completions.hidden = true;
+    input.setAttribute("aria-expanded", "false");
     input.blur();
   }
 

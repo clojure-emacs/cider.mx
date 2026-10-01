@@ -11,14 +11,14 @@
   <a href="{{ site.Params.docs }}" data-echo="Read the CIDER manual at docs.cider.mx">manual</a>
   <a href="#news" data-echo="Jump to the news">news</a>
   <a href="{{ site.Params.github }}" data-echo="Visit CIDER on GitHub">github{{ with $gh.stars }} {{ if ge . 1000 }}{{ printf "%.1fk" (div (float .) 1000) }}{{ else }}{{ . }}{{ end }}&#9733;{{ end }}</a>
-  <button type="button" class="load-theme" data-echo="Switch between modus-operandi and modus-vivendi">M-x load-theme</button>
+  <button type="button" class="load-theme" aria-label="Switch between light and dark theme" data-echo="Switch between modus-operandi and modus-vivendi">M-x load-theme</button>
 </header>
 
 <div class="frame" id="top">
   <main class="window text-window">
     <div class="buffer-text">
       <section class="opening" data-pane="hero">
-        <div class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</div>
+        <h1 class="logo">{{ (resources.Get "img/cider-logo.svg").Content | safeHTML }}</h1>
         <p class="comment">;; {{ .Params.tagline }}</p>
         <p class="intro">{{ .Params.intro }}</p>
         <div class="minibuffer" data-copy="{{ .Params.install }}">
@@ -61,8 +61,8 @@
         <summary><h2>News</h2></summary>
         <ul class="news">
           <li><time>latest</time><a href="{{ $gh.releaseURL }}">CIDER {{ $gh.version }} is the current release</a></li>
-          {{- range hugo.Data.news }}
-          <li><time datetime="{{ .date }}">{{ .date }}</time><a href="{{ .url }}">{{ .title }}</a></li>
+          {{- range partialCached "news.html" . }}
+          <li><time datetime="{{ .date.Format "2006-01-02" }}">{{ .date.Format "2006-01-02" }}</time><a href="{{ .url }}">{{ .title }}</a></li>
           {{- end }}
         </ul>
       </details>
@@ -123,7 +123,7 @@
   {{- /* The other window: on wide screens it shows the media for whatever
          section is being read. Without JavaScript it stays hidden and the
          media shows inline instead. */}}
-  <aside class="window media-window" aria-label="Screencasts">
+  <aside class="window media-window" aria-label="The other window: screencasts and examples for the section you're reading">
     <div class="pane" data-pane-id="hero">
       {{ partial "media.html" (dict "src" .Params.heroMedia "alt" .Params.heroAlt) }}
       <p class="pane-caption">{{ .Params.heroAlt }}</p>
@@ -207,10 +207,11 @@ all open menus that list what they can do.</pre>
     <span class="spacer"></span>
     <span class="hint"><kbd>?</kbd> keys <kbd>M-x</kbd> commands</span>
   </div>
-  <div class="echo-area" data-echo-area aria-live="polite">Hacker fame is just cider-jack-in away!</div>
+  <div class="echo-area" data-echo-area>Hacker fame is just cider-jack-in away!</div>
+  <div class="sr-only" data-announce aria-live="polite"></div>
   <div class="completions" data-completions hidden>
-    <ul role="listbox" data-candidates></ul>
-    <label class="mx-prompt"><span>M-x</span> <input type="text" data-mx-input autocomplete="off" spellcheck="false" aria-label="Command"></label>
+    <ul role="listbox" id="mx-candidates" aria-label="Commands" data-candidates></ul>
+    <label class="mx-prompt"><span>M-x</span> <input type="text" data-mx-input autocomplete="off" spellcheck="false" aria-label="Command" role="combobox" aria-controls="mx-candidates" aria-expanded="false" aria-autocomplete="list"></label>
   </div>
   <div class="which-key" data-which-key hidden>
     <dl>

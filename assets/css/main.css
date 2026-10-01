@@ -111,6 +111,7 @@ kbd {
   position: static;
   border-top: 1px solid var(--mode-line-border);
   border-bottom: 0;
+  overflow: hidden;
 }
 .mode-line .position { min-width: 4ch; }
 .mode-line .hint kbd { font-size: 0.85em; padding: 0 0.3em; border-bottom-width: 2px; }
@@ -236,6 +237,7 @@ body { padding-bottom: 4.5rem; }
   padding: 3.5rem 1.25rem 4rem;
 }
 .opening .logo { width: min(22rem, 70%); color: var(--fg); margin: 0 0 1.5rem; }
+.opening h1.logo::before { content: none; }
 .opening .logo svg { display: block; width: 100%; height: auto; }
 .comment { font-family: var(--mono); color: var(--fg-dim); font-size: 0.85em; margin-bottom: 1.5rem; }
 .intro { font-size: 1.1em; }
@@ -313,3 +315,21 @@ dl.faq dd { margin: 0.25rem 0 0; }
 }
 
 .colophon { font-size: 0.8em; color: var(--fg-dim); }
+
+/* The 404 page: a failed C-x C-f. */
+.not-found h1 { margin-top: 1rem; font-size: 1.8em; }
+.not-found h1::before { content: "* "; color: var(--fg-dim); font-weight: 400; }
+.echo-area .mx { color: var(--blue); font-weight: 700; }
+.echo-area .no-match { color: var(--magenta); }
+
+/* Accessibility */
+:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.mode-line :focus-visible { outline-color: var(--mode-line-fg); }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

@@ -17,6 +17,9 @@ Almost everything is plain YAML or markdown:
 - `data/features.yaml` - the "and a lot more" links
 - `data/release.yaml` - the feature release the page spotlights
 - `data/faq.yaml` - the FAQ
+- `data/news.yaml` - the news archive. Posts tagged CIDER on Meta Redux show up
+  on their own when the site is built (`newsFeed` and `newsTag` in `hugo.toml`);
+  add a post here to keep it listed after it drops out of the feed
 - `data/community.yaml` - help channels, related projects and funding links
 
 Screenshots and GIFs live in `static/media/`. The layout is
