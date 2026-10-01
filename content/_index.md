@@ -27,8 +27,9 @@ outro: Keep hacking!
 Phil Hagelberg hacked together the first nREPL client for Emacs on a flight to
 San Francisco in April 2012. Tim King picked it up, and by August `nrepl.el`
 had pushed SLIME aside as the way to write Clojure in Emacs. I took it over in
-2013 and renamed it to CIDER a few months later, mostly so people would stop
-confusing it with the nREPL server.
+2013, renamed it to CIDER a few months later (mostly so people would stop
+confusing it with the nREPL server), and I've been its primary author and
+maintainer ever since.
 
 Fourteen years on, CIDER is on its second major version and still changing
 more than most tools half its age. It's built by

@@ -33,6 +33,38 @@
   caption: Stepping through a thread-last pipeline, one value at a time.
   docs: https://docs.cider.mx/cider/debugging/debugger.html
 
+- title: Expand macros in place
+  keys: C-c M-m e
+  blurb: >-
+    Macros are much less mysterious when you can watch them unfold. Expand
+    one a step at a time right where it is in the source, keep expanding
+    the parts you're curious about, and collapse it all when you're done.
+  media: media/macrostep.webp
+  alt: A thread-last macro expanded in place into the reduce and map calls it stands for
+  caption: The ->> in total-price, expanded in place.
+  docs: https://docs.cider.mx/cider/debugging/macroexpansion.html
+
+- title: See who calls what
+  keys: C-c C-w c
+  blurb: >-
+    Before you change a function it's nice to know what depends on it. Ask
+    for its callers and you get a tree you can keep expanding, built from
+    what's actually loaded in your program.
+  media: media/who-calls.webp
+  alt: A tree view listing the two tests that call demo.core/greet
+  caption: Everything that calls greet, as a tree.
+  docs: https://docs.cider.mx/cider/usage/navigation.html
+
+- title: Results that aren't text
+  keys: C-c C-e
+  blurb: >-
+    Not every value is best read as text. Evaluate something that returns an
+    image and you get the image, right next to the code that made it.
+  media: media/rich-results.webp
+  alt: A function that draws a sunburst, with the image it returns shown inline
+  caption: A BufferedImage, evaluated and rendered inline.
+  docs: https://docs.cider.mx/cider/usage/code_evaluation.html#rich-results
+
 - title: Run the tests
   keys: C-c C-t n
   blurb: >-

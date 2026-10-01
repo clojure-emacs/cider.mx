@@ -297,7 +297,15 @@ ol.plain li::marker { font-family: var(--mono); color: var(--fg-dim); }
 dl.faq dt { font-weight: 700; margin-top: 1.25rem; }
 dl.faq dd { margin: 0.25rem 0 0; }
 
-.support a { font-weight: 700; }
+.funding a { font-weight: 700; }
+.tag {
+  font-family: var(--mono);
+  font-size: 0.75em;
+  padding: 0.05em 0.5em;
+  background: var(--region);
+  color: var(--region-fg);
+  border-radius: 3px;
+}
 .signoff { margin-top: 3rem; font-style: italic; }
 
 @media (max-width: 640px) {

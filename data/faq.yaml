@@ -30,7 +30,9 @@
 
 - q: Who's behind it?
   a: >-
-    CIDER is open source, has been going since 2012, and is built by
+    Me, Bozhidar Batsov. I've been CIDER's primary author and maintainer since
+    2013, and I look after its siblings (cider-nrepl, Orchard, nREPL and
+    friends) as well. I'm far from alone, though:
     <a href="https://github.com/clojure-emacs/cider/graphs/contributors">hundreds
-    of contributors</a> and funded by its users through Open Collective and
-    GitHub Sponsors.
+    of people</a> have contributed over the years, and the project is funded by
+    the people and companies who use it.

@@ -13,16 +13,22 @@ supportBlurb: >-
   CIDER is built by volunteers and funded by its users. If it saves you time,
   consider chipping in.
 
-# CIDER's own funding page lists the same channels, with Open Collective first.
+# The funding platforms; the recommended ones come first.
 support:
-  - name: Open Collective
-    url: https://opencollective.com/cider
   - name: GitHub Sponsors
     url: https://github.com/sponsors/bbatsov
+    recommended: true
+    blurb: monthly or one-time, right from your GitHub account
+  - name: Open Collective
+    url: https://opencollective.com/cider
+    recommended: true
+    blurb: every expense is public, and it's the easy route for companies
   - name: Patreon
     url: https://www.patreon.com/bbatsov
+    blurb: monthly memberships
   - name: PayPal
     url: https://www.paypal.me/bbatsov
+    blurb: a one-off donation
 
 ecosystem:
   - name: cider-nrepl
