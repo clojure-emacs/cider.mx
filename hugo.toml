@@ -11,6 +11,17 @@ ignoreLogs = ["github-fetch", "news-feed"]
   [[module.imports]]
     path = "github.com/bbatsov/hugo-project-landing"
 
+[menus]
+  [[menus.main]]
+    name = "related"
+    pageRef = "/related"
+    title = "Projects related to CIDER"
+    weight = 10
+  [[menus.footer]]
+    name = "Colophon"
+    pageRef = "/colophon"
+    weight = 10
+
 [params]
   name = "CIDER"
   buffer = "cider.mx"

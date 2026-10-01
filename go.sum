@@ -4,3 +4,5 @@ github.com/bbatsov/hugo-project-landing v0.2.0 h1:0LbY1UqHgRRN09p9zG8al6bkK4hGp2
 github.com/bbatsov/hugo-project-landing v0.2.0/go.mod h1:/ajoUNItCQcorJ8y07Q5W5sqH1BOuNUtKKiv6igFjxA=
 github.com/bbatsov/hugo-project-landing v0.2.1 h1:UFQlfQQ8wptG+jJyb0qmS3kfFXSxxaE+/tA57TLuOVM=
 github.com/bbatsov/hugo-project-landing v0.2.1/go.mod h1:/ajoUNItCQcorJ8y07Q5W5sqH1BOuNUtKKiv6igFjxA=
+github.com/bbatsov/hugo-project-landing v0.3.0 h1:62g94JQgvyeA6/Mr7HNtufMyhTtQh2EySUkDH+NWwU8=
+github.com/bbatsov/hugo-project-landing v0.3.0/go.mod h1:/ajoUNItCQcorJ8y07Q5W5sqH1BOuNUtKKiv6igFjxA=
