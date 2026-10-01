@@ -19,6 +19,9 @@ notable ones.
 - **[Orchard](https://github.com/clojure-emacs/orchard)** - the editor-agnostic
   library that cider-nrepl is built on. If you're writing Clojure tooling of
   your own, this is a good place to start.
+- **[Drawbridge](https://github.com/nrepl/drawbridge)** - an HTTP/HTTPS
+  transport for nREPL, for when a raw socket isn't an option. CIDER can
+  connect to it through Drawbridge's bridge.
 - **[Piggieback](https://github.com/nrepl/piggieback)** - nREPL support for
   ClojureScript REPLs.
 - **[clj-suitable](https://github.com/clojure-emacs/clj-suitable)** - completion
@@ -37,8 +40,17 @@ notable ones.
 - **[inf-clojure](https://github.com/clojure-emacs/inf-clojure)** - basic
   interaction with a Clojure subprocess, for when you don't need (or can't
   use) nREPL.
+- **[Sayid](https://github.com/clojure-emacs/sayid)** - an omniscient
+  debugger. Instead of stopping at a breakpoint, it records every call to the
+  functions you've traced and lets you dig through the recording afterwards.
+  It comes with its own Emacs package and plays nicely with CIDER.
 - **[sesman](https://github.com/vspinu/sesman)** - the session management that
   CIDER uses to tie REPLs to projects.
+- **[parseedn](https://github.com/clojure-emacs/parseedn)** and
+  **[parseclj](https://github.com/clojure-emacs/parseclj)** - EDN and Clojure
+  parsers written in Emacs Lisp. CIDER uses parseedn to read EDN - say,
+  shadow-cljs's config or data returned by your program - and parseedn is built
+  on parseclj.
 
 ## More
 
